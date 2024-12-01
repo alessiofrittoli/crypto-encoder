@@ -74,6 +74,8 @@ You can eventually run specific suits like so:
 
 ```bash
 pnpm test:jest
+pnpm test:base64
+pnpm test:base64:jsdom
 ```
 
 ---
