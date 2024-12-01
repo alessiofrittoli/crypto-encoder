@@ -9,7 +9,12 @@
 	},
 	"license": "MIT",
 	"keywords": [
-		"nodejs", "base32", "base64", "base64url", "encoding", "decoding"
+		"nodejs",
+		"base32",
+		"base64",
+		"base64url",
+		"encoding",
+		"decoding"
 	],
 	"homepage": "https://github.com/alessiofrittoli/crypto-encoder#readme",
 	"bugs": {
@@ -28,11 +33,16 @@
 	],
 	"sideEffects": false,
 	"scripts": {
-		"build": "eslint && jest --ci --verbose && tsup",
+		"build": "eslint && pnpm test:ci && pnpm test:ci:jsdom && tsup",
 		"lint": "eslint",
 		"test": "jest --watchAll --verbose",
+		"test:jsdom": "JSDOM=true pnpm test",
 		"test:ci": "jest --ci --verbose",
-		"test:jest": "pnpm test jest.test.ts"
+		"test:ci:jsdom": "JSDOM=true pnpm test:ci",
+		"test:jest": "pnpm test jest.test.ts",
+		"test:jest:jsdom": "JSDOM=true pnpm test:jest",
+		"test:base64": "pnpm test base64.test.ts",
+		"test:base64:jsdom": "JSDOM=true pnpm test:base64"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.16.0",
@@ -43,6 +53,7 @@
 		"eslint": "^9.16.0",
 		"globals": "^15.12.0",
 		"jest": "^29.7.0",
+		"jest-environment-jsdom": "^29.7.0",
 		"ts-jest": "^29.2.5",
 		"ts-node": "^10.9.2",
 		"tsup": "^8.3.5",
