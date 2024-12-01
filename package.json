@@ -31,6 +31,17 @@
 	"files": [
 		"dist"
 	],
+	"exports": {
+		".": {
+			"import": "./dist/index.mjs",
+			"require": "./dist/index.js"
+		},
+		"./Base64": {
+			"types": "./dist/Base64.d.ts",
+			"import": "./dist/Base64.mjs",
+			"require": "./dist/Base64.js"
+		}
+	},
 	"sideEffects": false,
 	"scripts": {
 		"build": "eslint && pnpm test:ci && pnpm test:ci:jsdom && tsup",
