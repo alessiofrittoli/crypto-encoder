@@ -36,6 +36,11 @@
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		},
+		"./Base32": {
+			"types": "./dist/Base32.d.ts",
+			"import": "./dist/Base32.mjs",
+			"require": "./dist/Base32.js"
+		},
 		"./Base64": {
 			"types": "./dist/Base64.d.ts",
 			"import": "./dist/Base64.mjs",
@@ -70,5 +75,8 @@
 		"tsup": "^8.3.5",
 		"typescript": "^5.7.2",
 		"typescript-eslint": "^8.16.0"
+	},
+	"dependencies": {
+		"@alessiofrittoli/type-utils": "^0.3.1"
 	}
 }
