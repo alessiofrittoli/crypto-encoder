@@ -79,6 +79,7 @@
 		"typescript-eslint": "^8.16.0"
 	},
 	"dependencies": {
+		"@alessiofrittoli/crypto-buffer": "0.1.0-alpha.2",
 		"@alessiofrittoli/type-utils": "^0.3.1"
 	}
 }

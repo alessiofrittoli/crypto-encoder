@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@alessiofrittoli/crypto-buffer':
+        specifier: 0.1.0-alpha.2
+        version: 0.1.0-alpha.2
       '@alessiofrittoli/type-utils':
         specifier: ^0.3.1
         version: 0.3.1
@@ -56,6 +59,9 @@ importers:
         version: 8.16.0(eslint@9.16.0)(typescript@5.7.2)
 
 packages:
+
+  '@alessiofrittoli/crypto-buffer@0.1.0-alpha.2':
+    resolution: {integrity: sha512-uHQ4bK8a8nHFtqZtkdkHwosgDq79zVGcWT2aE5ubLr2BugahXNEzBmHj7EXNofS1j0mkjE7oeurPOervTZNQ2g==}
 
   '@alessiofrittoli/type-utils@0.3.1':
     resolution: {integrity: sha512-RGBSmY8kUb72yGFXB5YyJptdclhzn1O8oYk6m5ZE3E0XGLJcazuDVTkd3Hcmfh/4dOvT24/zdFsySHVQE0NcwQ==}
@@ -2265,6 +2271,8 @@ packages:
     engines: {node: '>=10'}
 
 snapshots:
+
+  '@alessiofrittoli/crypto-buffer@0.1.0-alpha.2': {}
 
   '@alessiofrittoli/type-utils@0.3.1': {}
 
