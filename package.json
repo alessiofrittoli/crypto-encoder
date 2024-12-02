@@ -57,6 +57,8 @@
 		"test:ci:jsdom": "JSDOM=true pnpm test:ci",
 		"test:jest": "pnpm test jest.test.ts",
 		"test:jest:jsdom": "JSDOM=true pnpm test:jest",
+		"test:base32": "pnpm test base32.test.ts",
+		"test:base32:jsdom": "JSDOM=true pnpm test:base32",
 		"test:base64": "pnpm test base64.test.ts",
 		"test:base64:jsdom": "JSDOM=true pnpm test:base64"
 	},
