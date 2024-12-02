@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@alessiofrittoli/type-utils':
+        specifier: ^0.3.1
+        version: 0.3.1
     devDependencies:
       '@eslint/js':
         specifier: ^9.16.0
@@ -52,6 +56,9 @@ importers:
         version: 8.16.0(eslint@9.16.0)(typescript@5.7.2)
 
 packages:
+
+  '@alessiofrittoli/type-utils@0.3.1':
+    resolution: {integrity: sha512-RGBSmY8kUb72yGFXB5YyJptdclhzn1O8oYk6m5ZE3E0XGLJcazuDVTkd3Hcmfh/4dOvT24/zdFsySHVQE0NcwQ==}
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -2258,6 +2265,8 @@ packages:
     engines: {node: '>=10'}
 
 snapshots:
+
+  '@alessiofrittoli/type-utils@0.3.1': {}
 
   '@ampproject/remapping@2.3.0':
     dependencies:
