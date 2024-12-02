@@ -1,4 +1,4 @@
-import toDataView from '@alessiofrittoli/crypto-buffer/toDataView'
+import toDataView, { type ToDataViewInput } from '@alessiofrittoli/crypto-buffer/toDataView'
 
 
 /**
@@ -79,7 +79,7 @@ class Base32
 	 * - `'Crockford'` - [Crockford's Base32](http://www.crockford.com/wrmg/base32.html)
 	 */
 	static encode(
-		data		: ArrayBuffer | Int8Array | Uint8Array | Uint8ClampedArray,
+		data		: ToDataViewInput,
 		variant		: Variant,
 		options?	: EncodeOptions,
 	)
