@@ -1,3 +1,6 @@
+import toDataView from '@alessiofrittoli/crypto-buffer/toDataView'
+
+
 /**
  * Base32 Variant
  * 
@@ -85,7 +88,7 @@ class Base32
 
 		const resolved	= Base32.getEncodeVariantAlphabetAndPadding( variant )
 		const padding	= options.padding ?? resolved.padding
-		const view		= Base32.toDataView( data )
+		const view		= toDataView( data )
 		
 		let bits	= 0
 		let value	= 0
@@ -149,28 +152,6 @@ class Base32
 
 
 	/**
-	 * Convert data to `DateView`.
-	 * 
-	 * @deprecated use `@alessiofrittoli/crypto-buffer` > toDataView( ... )
-	 * 
-	 * @param data The data to converto to `DataView`.
-	 * @returns The `DataView` of the given data. Throws a new Exception on failure.
-	 */
-	private static toDataView( data: ArrayBuffer | Int8Array | Uint8Array | Uint8ClampedArray )
-	{
-		if ( data instanceof Int8Array || data instanceof Uint8Array || data instanceof Uint8ClampedArray ) {
-			return new DataView( data.buffer, data.byteOffset, data.byteLength )
-		}
-
-		if ( data instanceof ArrayBuffer ) {
-			return new DataView( data )
-		}
-
-		throw new TypeError( 'Expected `data` to be an ArrayBuffer, Buffer, Int8Array, Uint8Array or Uint8ClampedArray' )
-	}
-
-
-	/**
 	 * Get the index of the `char` in the Base32 Variant `alphabet`.
 	 * 
 	 * @param	alphabet	The Base32 Variant alphabet.
@@ -201,18 +182,18 @@ class Base32
 			case 'RFC3548':
 			case 'RFC4648':
 				return {
-					alphabet	: Base32.ALPHABET.RFC4648,
-					padding		: true,
+					alphabet: Base32.ALPHABET.RFC4648,
+					padding	: true,
 				} as const
 			case 'RFC4648-HEX':
 				return {
-					alphabet	: Base32.ALPHABET.RFC4648_HEX,
-					padding		: true,
+					alphabet: Base32.ALPHABET.RFC4648_HEX,
+					padding	: true,
 				} as const
 			case 'Crockford':
 				return {
-					alphabet	: Base32.ALPHABET.CROCKFORD,
-					padding		: false,
+					alphabet: Base32.ALPHABET.CROCKFORD,
+					padding	: false,
 				} as const
 			default:
 				throw new Error( `Unknown base32 variant: ${ variant }` )
