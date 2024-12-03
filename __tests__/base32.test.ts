@@ -1,4 +1,4 @@
-import Base32, { Variant } from '@/Base32'
+import Base32, { type Variant } from '@/Base32'
 
 const tests: ({
 	variant	: Variant
@@ -35,14 +35,8 @@ describe( 'Base32.encode()', () => {
 	tests.map( test => {
 
 		it( `encodes using ${ test.variant } variant` + clientSuffix, () => {
-			
-			const dataBuffer = (
-				typeof window !== 'undefined'
-					? new Uint8Array( new TextEncoder().encode( test.input ) )
-					: Buffer.from( test.input )
-			)
 	
-			expect( Base32.encode( dataBuffer, test.variant ) )
+			expect( Base32.encode( test.input, test.variant ) )
 				.toBe( test.output )
 
 		} )
