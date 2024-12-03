@@ -7,6 +7,7 @@ Version 0.1.0
 ### Table of Contents
 
 - [Getting started](#getting-started)
+- [Base32](#base32)
 - [Security](#security)
 - [Credits](#made-with-)
 
@@ -25,6 +26,135 @@ or using `pnpm`
 ```bash
 pnpm i @alessiofrittoli/crypto-encoder
 ```
+
+---
+
+### Base32
+
+This module provides a `Base32` utility class for encoding and decoding data according to various `Base32` specifications.\
+It supports multiple `Base32` variants and offers flexible options for encoding.
+
+<details>
+
+<summary>Overview</summary>
+
+The `Base32` class provides methods to encode and decode data using Base32, supporting multiple variants as defined by the following specifications:
+
+- [Base32 from RFC4648](https://tools.ietf.org/html/rfc4648)
+- [Base32hex from RFC4648](https://tools.ietf.org/html/rfc4648)
+- [Crockford's Base32](http://www.crockford.com/wrmg/base32.html)
+
+</details>
+
+<details>
+
+<summary>Variants</summary>
+
+The following Base32 variants are supported:
+
+- `RFC3548` - Alias for `RFC4648`
+- `RFC4648` - The standard Base32 encoding.
+- `RFC4648-HEX` - Base32 encoding with a hexadecimal-like alphabet.
+- `Crockford` - A Base32 variant designed to be human-friendly.
+
+</details>
+
+<details>
+
+<summary>API Reference</summary>
+
+#### Static Properties
+
+##### `Base32.VARIANT`
+
+An object containing the available Base32 variants:
+
+```ts
+Base32.VARIANT = {
+	RFC3548		: 'RFC3548',
+	RFC4648		: 'RFC4648',
+	RFC4648_HEX	: 'RFC4648-HEX',
+	Crockford	: 'Crockford',
+}
+```
+
+#### Static Methods
+
+##### `Base32.encode()`
+
+Encodes data to a Base32 string.
+
+###### Parameters
+
+| Parameter         | Type            | Description                        |
+|-------------------|-----------------|------------------------------------|
+| `data`            | `(number[] \| ArrayBuffer \| Int8Array \| Int16Array \| Int32Array \| Uint8Array \| Uint16Array \| Uint32Array \| Uint8ClampedArray)` | The data to encode. |
+| `variant`         | `Variant`       | The Base32 variant to use. |
+| `options`         | `EncodeOptions` | (Optional) Encoding options. |
+| `options.padding` | `boolean`       | If set, forcefully enable or disable padding. The default behavior is to follow the default of the selected variant. |
+
+###### Returns
+
+Type: `string`
+
+A Base32 encoded string.
+
+###### Example usage
+
+```ts
+import { Base32 } from '@alessiofrittoli/crypto-encoder'
+// or
+import Base32 from '@alessiofrittoli/crypto-encoder/Base32'
+
+const dataBuffer = (
+	typeof window !== 'undefined'
+		? new Uint8Array( new TextEncoder().encode( 'some value' ) )
+		: Buffer.from( 'some value' )
+)
+console.log( Base32.encode( dataBuffer, 'RFC3548' ) )
+// or
+console.log( Base32.encode( dataBuffer, Base32.VARIANT.RFC3548 ) )
+// Outputs: 'ONXW2ZJAOZQWY5LF'
+```
+
+---
+
+##### `Base32.decode()`
+
+Decodes a Base32 string to binary data.
+
+###### Parameters
+
+| Parameter         | Type            | Description                                  |
+|-------------------|-----------------|----------------------------------------------|
+| `input`           | `string`        | The Base32-encoded string.                   |
+| `variant`         | `Variant`       | The Base32 variant used to encode the input. |
+
+###### Returns
+
+Type: `ArrayBuffer`
+
+An `ArrayBuffer` containing the decoded data.
+
+###### Example usage
+
+```ts
+import { Base32 } from '@alessiofrittoli/crypto-encoder'
+// or
+import Base32 from '@alessiofrittoli/crypto-encoder/Base32'
+
+const input		= 'ONXW2ZJAOZQWY5LF'
+const decoded	= Base32.decode( input, 'RFC3548' )
+// or
+const decoded	= Base32.decode( input, Base32.VARIANT.RFC3548 )
+
+console.log( Buffer.from( decoded ).toString() ) // Node.js
+// or
+console.log( new TextDecoder().decode( decoded ) ) // client-side
+// Outputs: 'some value'
+```
+
+</details>
 
 ---
 
