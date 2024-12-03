@@ -1,3 +1,27 @@
+import { stringToBytes } from '@alessiofrittoli/crypto-buffer'
+
+/**
+ * The {@link Base64.encode} supported input Type.
+ */
+export type EncodeInput = (
+	| string
+	| number[]
+	| ArrayBuffer
+	| Int8Array
+	| Int16Array
+	| Int32Array
+	| Uint8Array
+	| Uint16Array
+	| Uint32Array
+	| Uint8ClampedArray
+	| Buffer
+)
+
+
+/**
+ * Base54 Utility static class.
+ * 
+ */
 class Base64
 {
 	/**
@@ -54,28 +78,45 @@ class Base64
 	/**
 	 * Encode a string or Buffer to a base64/base64url string.
 	 *
-	 * @param	data		The data to encode.
+	 * @param	input		The data to encode.
 	 * @param	normalize	( Optional ) Whether to normalize the string to base64url. Default: `false`.
 	 * 
 	 * @returns	The encoded base64url ( or base64 if `normalize` is set to false ) string.
 	 */
-	static encode( data: string | Uint8Array | Buffer, normalize: boolean = false )
+	static encode( input: EncodeInput, normalize: boolean = false )
 	{
-		if ( typeof data === 'string' ) {
-			data = ( new TextEncoder() ).encode( data )
+		if ( typeof input === 'string' ) {
+			input = stringToBytes( input )
 		}
+		if ( input instanceof ArrayBuffer ) {
+			input = stringToBytes( new TextDecoder().decode( input ) )
+		}
+		if (
+			input instanceof Int8Array ||
+			input instanceof Int16Array ||
+			input instanceof Int32Array ||
+			input instanceof Uint8Array ||
+			input instanceof Uint16Array ||
+			input instanceof Uint32Array ||
+			input instanceof Uint8ClampedArray
+		) {
+			input = [ ...input ]
+		}
+
 		return (
 			typeof window !== 'undefined' ? (
 				Base64.fromBase64(
 					window.btoa(
 						String.fromCharCode(
-							...new Uint8Array( data )
+							...new Uint8Array( input )
 						)
 					), normalize
 				)
 			) : (
-				Buffer.from( data )
-					.toString( normalize ? 'base64url' : 'base64' )
+				Base64.fromBase64(
+					Buffer.from( input )
+						.toString( normalize ? 'base64url' : 'base64' )
+				, normalize )
 			)
 		)
 	}
