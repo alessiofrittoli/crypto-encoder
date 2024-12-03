@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@alessiofrittoli/crypto-buffer':
-        specifier: 0.1.0-alpha.2
-        version: 0.1.0-alpha.2
+        specifier: 0.1.0-alpha.3
+        version: 0.1.0-alpha.3
       '@alessiofrittoli/type-utils':
         specifier: ^0.3.1
         version: 0.3.1
@@ -60,8 +60,8 @@ importers:
 
 packages:
 
-  '@alessiofrittoli/crypto-buffer@0.1.0-alpha.2':
-    resolution: {integrity: sha512-uHQ4bK8a8nHFtqZtkdkHwosgDq79zVGcWT2aE5ubLr2BugahXNEzBmHj7EXNofS1j0mkjE7oeurPOervTZNQ2g==}
+  '@alessiofrittoli/crypto-buffer@0.1.0-alpha.3':
+    resolution: {integrity: sha512-s+I6O61e4WYL9xzgztHD+kQhhwLTvR5TLmjy1mNwENS+vm1hK1cqIvDZgS3Yk86Pm4Sw8VY8jSusTkoycDdpnA==}
 
   '@alessiofrittoli/type-utils@0.3.1':
     resolution: {integrity: sha512-RGBSmY8kUb72yGFXB5YyJptdclhzn1O8oYk6m5ZE3E0XGLJcazuDVTkd3Hcmfh/4dOvT24/zdFsySHVQE0NcwQ==}
@@ -2272,7 +2272,7 @@ packages:
 
 snapshots:
 
-  '@alessiofrittoli/crypto-buffer@0.1.0-alpha.2': {}
+  '@alessiofrittoli/crypto-buffer@0.1.0-alpha.3': {}
 
   '@alessiofrittoli/type-utils@0.3.1': {}
 
