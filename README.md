@@ -88,7 +88,7 @@ Encodes data to a Base32 string.
 
 | Parameter         | Type            | Description                        |
 |-------------------|-----------------|------------------------------------|
-| `data`            | `(number[] \| ArrayBuffer \| Int8Array \| Int16Array \| Int32Array \| Uint8Array \| Uint16Array \| Uint32Array \| Uint8ClampedArray)` | The data to encode. |
+| `data`            | `string \| number[] \| ArrayLike<number> \| ArrayBuffer \| Int8Array \| Int16Array \| Int32Array \| Uint8Array \| Uint16Array \| Uint32Array \| Uint8ClampedArray` | The data to encode. |
 | `variant`         | `Variant`       | The Base32 variant to use. |
 | `options`         | `EncodeOptions` | (Optional) Encoding options. |
 | `options.padding` | `boolean`       | If set, forcefully enable or disable padding. The default behavior is to follow the default of the selected variant. |
@@ -106,14 +106,9 @@ import { Base32 } from '@alessiofrittoli/crypto-encoder'
 // or
 import Base32 from '@alessiofrittoli/crypto-encoder/Base32'
 
-const dataBuffer = (
-	typeof window !== 'undefined'
-		? new Uint8Array( new TextEncoder().encode( 'some value' ) )
-		: Buffer.from( 'some value' )
-)
-console.log( Base32.encode( dataBuffer, 'RFC3548' ) )
+console.log( Base32.encode( 'some value', 'RFC3548' ) )
 // or
-console.log( Base32.encode( dataBuffer, Base32.VARIANT.RFC3548 ) )
+console.log( Base32.encode( 'some value', Base32.VARIANT.RFC3548 ) )
 // Outputs: 'ONXW2ZJAOZQWY5LF'
 ```
 
