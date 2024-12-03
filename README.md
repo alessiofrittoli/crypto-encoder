@@ -8,6 +8,7 @@ Version 0.1.0
 
 - [Getting started](#getting-started)
 - [Base32](#base32)
+- [Base64](#base64)
 - [Security](#security)
 - [Credits](#made-with-)
 
@@ -155,6 +156,10 @@ console.log( new TextDecoder().decode( decoded ) ) // client-side
 ```
 
 </details>
+
+---
+
+### Base64
 
 ---
 
