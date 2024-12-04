@@ -1,6 +1,6 @@
 # Crypto Encoder 🧮
 
-Version 0.1.0
+Version 0.2.0
 
 ## Lightweight TypeScript encoder/decoder library
 
@@ -152,6 +152,8 @@ const decoded	= Base32.decode( input, Base32.VARIANT.RFC3548 )
 console.log( Buffer.from( decoded ).toString() ) // Node.js
 // or
 console.log( new TextDecoder().decode( decoded ) ) // client-side
+// or
+console.log( Base32.toString( decoded ) ) // Node.js + client-side
 // Outputs: 'some value'
 ```
 
@@ -160,6 +162,88 @@ console.log( new TextDecoder().decode( decoded ) ) // client-side
 ---
 
 ### Base64
+
+This module provides a static `Base64` utility class for encoding and decoding data to and from Base64/Base64url formats. It supports various input types and offers options for normalization between Base64 and Base64url formats.
+
+<details>
+
+<summary>Overview</summary>
+
+The `Base64` class provides static methods for:
+
+- Encoding data to Base64/Base64url strings.
+- Decoding Base64/Base64url strings to binary data.
+- Normalizing strings between Base64 and Base64url formats.
+
+The implementation is compatible with both browser and Node.js environments.
+
+</details>
+
+<details>
+
+<summary>API Reference</summary>
+
+#### Static Methods
+
+##### `Base64.encode()`
+
+Encodes data to a Base64 or Base64url string.
+
+###### Parameters
+
+| Parameter | Type            | Default | Description                                   |
+|-----------|-----------------|---------| ----------------------------------------------|
+| `input`   | `string \| number[] \| Buffer \| ArrayBuffer \| Int8Array \| Int16Array \| Int32Array \| Uint8Array \| Uint16Array \| Uint32Array \| Uint8ClampedArray` | -       | The data to encode. |
+| `normalize` | `boolean`       | `false`  | Whether to normalize the output to Base64url. |
+
+###### Returns
+
+Type: `string`
+
+A Base64 or Base64url encoded string.
+
+###### Example
+
+```ts
+const data		= 'Hello, World!'
+const base64	= Base64.encode( data )
+const base64url	= Base64.encode( data, true )
+
+console.log( base64 ) // Outputs: 'SGVsbG8sIFdvcmxkIQ=='
+console.log( base64url ) // Outputs: 'SGVsbG8sIFdvcmxkIQ'
+```
+
+---
+
+##### `Base64.decode()`
+
+Decodes a Base64 or Base64url string.
+
+###### Parameters
+
+| Parameter | Type     | Description                               |
+|-----------|----------|-------------------------------------------|
+| `data`    | `string` | The Base64 or Base64url string to decode. |
+
+###### Returns
+
+Type: `Buffer`
+
+A `Buffer` containing the decoded data.
+
+###### Example
+
+```ts
+const base64	= 'SGVsbG8sIFdvcmxkIQ=='
+const base64url	= 'SGVsbG8sIFdvcmxkIQ'
+
+console.log( Base64.toString( Base64.decode( base64 ) ) )
+// or
+console.log( Base64.toString( Base64.decode( base64url ) ) )
+// Outputs: 'Hello, World!'
+```
+
+</details>
 
 ---
 
