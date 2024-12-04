@@ -53,13 +53,8 @@ describe( 'Base32.decode()', () => {
 		it( `decodes using ${ test.variant } variant` + clientSuffix, () => {
 
 			const decoded = Base32.decode( test.output, test.variant )
-			const converted = (
-				typeof window !== 'undefined'
-					? new TextDecoder().decode( decoded )
-					: Buffer.from( decoded ).toString()
-			)
 	
-			expect( converted ).toBe( test.input )
+			expect( Base32.toString( decoded ) ).toBe( test.input )
 
 		} )
 
