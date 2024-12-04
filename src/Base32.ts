@@ -1,3 +1,4 @@
+import { binaryToString } from '@alessiofrittoli/crypto-buffer'
 import toDataView, { type ToDataViewInput } from '@alessiofrittoli/crypto-buffer/toDataView'
 
 
@@ -236,6 +237,7 @@ class Base32
 		}
 	}
 
+	static toString = binaryToString
 }
 
 
