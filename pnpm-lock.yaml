@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@alessiofrittoli/crypto-buffer':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 2.0.1
+        version: 2.0.1
       '@alessiofrittoli/type-utils':
-        specifier: ^0.3.1
-        version: 0.3.1
+        specifier: ^0.3.2
+        version: 0.3.2
     devDependencies:
       '@eslint/js':
         specifier: ^9.16.0
@@ -60,11 +60,11 @@ importers:
 
 packages:
 
-  '@alessiofrittoli/crypto-buffer@1.1.0':
-    resolution: {integrity: sha512-3bRNZWb4ic8SfCs4Ap25PtwsK47+6JlYn/KY/a/loCz490HPMP+SmhRzS2BUIdnrjOdzyHE0VYt8pGIYkl+uyw==}
+  '@alessiofrittoli/crypto-buffer@2.0.1':
+    resolution: {integrity: sha512-hTFnVRawDlDJUkY0fTgEbsbCP+lQ6cXqAyzrVp/dn7AB+neWb1JMzLJRGC9kiImPhmuEsW3/R+d/JyXSU76msA==}
 
-  '@alessiofrittoli/type-utils@0.3.1':
-    resolution: {integrity: sha512-RGBSmY8kUb72yGFXB5YyJptdclhzn1O8oYk6m5ZE3E0XGLJcazuDVTkd3Hcmfh/4dOvT24/zdFsySHVQE0NcwQ==}
+  '@alessiofrittoli/type-utils@0.3.2':
+    resolution: {integrity: sha512-VbrmEWFueHfSYRBvzu6WjrzH9pyqt8QNxNQ52Pc8LxyWWX8RUWK6xhfrF3HHUw27b+d2FqHNk5HVf3pHVC1ZPg==}
 
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
@@ -2272,9 +2272,9 @@ packages:
 
 snapshots:
 
-  '@alessiofrittoli/crypto-buffer@1.1.0': {}
+  '@alessiofrittoli/crypto-buffer@2.0.1': {}
 
-  '@alessiofrittoli/type-utils@0.3.1': {}
+  '@alessiofrittoli/type-utils@0.3.2': {}
 
   '@ampproject/remapping@2.3.0':
     dependencies:

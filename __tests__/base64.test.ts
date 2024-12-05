@@ -1,5 +1,6 @@
 import Base64 from '@/Base64'
-import { stringToBytes } from '@alessiofrittoli/crypto-buffer'
+import { stringToBytes } from '@alessiofrittoli/crypto-buffer/conversion'
+import { coerceToBigInt64Array, coerceToBigUint64Array, } from '@alessiofrittoli/crypto-buffer/coercion'
 
 // const str: {
 // 	value		: string
@@ -49,13 +50,13 @@ describe( 'Base64.fromBase64url()', () => {
 
 describe( 'Base64.encode()', () => {
 
-	it( 'encodes String to base64' + clientSuffix, () => {		
+	it( 'encodes to base64' + clientSuffix, () => {		
 		expect( Base64.encode( str.value ) )
 			.toBe( str.base64 )
 	} )
 
 
-	it( 'encodes String to base64url' + clientSuffix, () => {
+	it( 'encodes to base64url' + clientSuffix, () => {
 		expect( Base64.encode( str.value, true ) )
 			.toBe( str.base64url )
 	} )
@@ -67,21 +68,9 @@ describe( 'Base64.encode()', () => {
 	} )
 
 
-	it( 'encodes Array of bytes to base64url' + clientSuffix, () => {
-		expect( Base64.encode( stringToBytes( str.value ), true ) )
-			.toBe( str.base64url )
-	} )
-
-
 	it( 'encodes Buffer to base64' + clientSuffix, () => {
 		expect( Base64.encode( Buffer.from( str.value, 'utf-8' ) ) )
 			.toBe( str.base64 )
-	} )
-
-
-	it( 'encodes Buffer to base64url' + clientSuffix, () => {
-		expect( Base64.encode( Buffer.from( str.value, 'utf-8' ), true ) )
-			.toBe( str.base64url )
 	} )
 
 
@@ -91,21 +80,9 @@ describe( 'Base64.encode()', () => {
 	} )
 
 
-	it( 'encodes ArrayBuffer to base64url' + clientSuffix, () => {
-		expect( Base64.encode( new Uint8Array( stringToBytes( str.value ) ).buffer, true ) )
-			.toBe( str.base64url )
-	} )
-
-
 	it( 'encodes Int8Array to base64' + clientSuffix, () => {
 		expect( Base64.encode( new Int8Array( stringToBytes( str.value ) ) ) )
 			.toBe( str.base64 )
-	} )
-
-
-	it( 'encodes Int8Array to base64url' + clientSuffix, () => {
-		expect( Base64.encode( new Int8Array( stringToBytes( str.value ) ), true ) )
-			.toBe( str.base64url )
 	} )
 
 
@@ -115,21 +92,9 @@ describe( 'Base64.encode()', () => {
 	} )
 
 
-	it( 'encodes Int16Array to base64url' + clientSuffix, () => {
-		expect( Base64.encode( new Int16Array( stringToBytes( str.value ) ), true ) )
-			.toBe( str.base64url )
-	} )
-
-
 	it( 'encodes Int32Array to base64' + clientSuffix, () => {
 		expect( Base64.encode( new Int32Array( stringToBytes( str.value ) ) ) )
 			.toBe( str.base64 )
-	} )
-
-
-	it( 'encodes Int32Array to base64url' + clientSuffix, () => {
-		expect( Base64.encode( new Int32Array( stringToBytes( str.value ) ), true ) )
-			.toBe( str.base64url )
 	} )
 
 
@@ -139,21 +104,9 @@ describe( 'Base64.encode()', () => {
 	} )
 
 
-	it( 'encodes Uint8Array to base64url' + clientSuffix, () => {
-		expect( Base64.encode( new Uint8Array( stringToBytes( str.value ) ), true ) )
-			.toBe( str.base64url )
-	} )
-
-
 	it( 'encodes Uint16Array to base64' + clientSuffix, () => {
 		expect( Base64.encode( new Uint16Array( stringToBytes( str.value ) ) ) )
 			.toBe( str.base64 )
-	} )
-
-
-	it( 'encodes Uint16Array to base64url' + clientSuffix, () => {
-		expect( Base64.encode( new Uint16Array( stringToBytes( str.value ) ), true ) )
-			.toBe( str.base64url )
 	} )
 
 
@@ -163,21 +116,21 @@ describe( 'Base64.encode()', () => {
 	} )
 
 
-	it( 'encodes Uint32Array to base64url' + clientSuffix, () => {
-		expect( Base64.encode( new Uint32Array( stringToBytes( str.value ) ), true ) )
-			.toBe( str.base64url )
-	} )
-
-
 	it( 'encodes Uint8ClampedArray to base64' + clientSuffix, () => {
 		expect( Base64.encode( new Uint8ClampedArray( stringToBytes( str.value ) ) ) )
 			.toBe( str.base64 )
 	} )
 
 
-	it( 'encodes Uint8ClampedArray to base64url' + clientSuffix, () => {
-		expect( Base64.encode( new Uint8ClampedArray( stringToBytes( str.value ) ), true ) )
-			.toBe( str.base64url )
+	it( 'encodes BigInt64Array to base64' + clientSuffix, () => {
+		expect( Base64.encode( coerceToBigInt64Array( str.value ) ) )
+			.toBe( str.base64 )
+	} )
+
+
+	it( 'encodes BigUint64Array to base64' + clientSuffix, () => {
+		expect( Base64.encode( coerceToBigUint64Array( str.value ) ) )
+			.toBe( str.base64 )
 	} )
 
 } )
