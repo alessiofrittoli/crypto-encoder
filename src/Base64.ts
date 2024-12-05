@@ -1,4 +1,4 @@
-import { binaryToString, stringToBuffer, stringToBytes } from '@alessiofrittoli/crypto-buffer'
+import { binaryToString, coerceToUint8Array, stringToBinary, stringToBytes } from '@alessiofrittoli/crypto-buffer'
 
 /**
  * The {@link Base64.encode} supported input Type.
@@ -6,15 +6,9 @@ import { binaryToString, stringToBuffer, stringToBytes } from '@alessiofrittoli/
 export type EncodeInput = (
 	| string
 	| Array<number>
-	| ArrayBuffer
-	| Int8Array
-	| Int16Array
-	| Int32Array
-	| Uint8Array
-	| Uint16Array
-	| Uint32Array
-	| Uint8ClampedArray
 	| Buffer
+	| ArrayBuffer
+	| NodeJS.TypedArray
 )
 
 
@@ -47,7 +41,7 @@ class Base64
 				)
 			) : (
 				Base64.fromBase64(
-					Buffer.from( new Uint8Array( input ) )
+					Buffer.from( coerceToUint8Array( input ) )
 						.toString( normalize ? 'base64url' : 'base64' )
 				, normalize )
 			)
@@ -66,7 +60,7 @@ class Base64
 	{
 		return (
 			typeof window !== 'undefined'
-				? stringToBuffer( window.atob( Base64.fromBase64url( data ) ) )
+				? stringToBinary( window.atob( Base64.fromBase64url( data ) ) )
 				: Buffer.from( Base64.fromBase64url( data ), 'base64' )
 		)
 	}
