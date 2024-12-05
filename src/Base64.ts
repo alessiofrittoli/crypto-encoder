@@ -1,4 +1,4 @@
-import { binaryToString, stringToBuffer, stringToBytes } from '@alessiofrittoli/crypto-buffer'
+import { binaryToString, stringToBinary, stringToBytes } from '@alessiofrittoli/crypto-buffer'
 
 /**
  * The {@link Base64.encode} supported input Type.
@@ -66,7 +66,7 @@ class Base64
 	{
 		return (
 			typeof window !== 'undefined'
-				? stringToBuffer( window.atob( Base64.fromBase64url( data ) ) )
+				? stringToBinary( window.atob( Base64.fromBase64url( data ) ) )
 				: Buffer.from( Base64.fromBase64url( data ), 'base64' )
 		)
 	}
