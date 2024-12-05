@@ -13,7 +13,7 @@ export type EncodeInput = (
 
 
 /**
- * Base54 Utility static class.
+ * Base64 Utility static class.
  * 
  */
 class Base64
