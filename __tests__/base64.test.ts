@@ -1,4 +1,4 @@
-import Base64 from '@/Base64'
+import { Base64 } from '@/Base64'
 import { stringToBytes } from '@alessiofrittoli/crypto-buffer/conversion'
 import { coerceToBigInt64Array, coerceToBigUint64Array, } from '@alessiofrittoli/crypto-buffer/coercion'
 

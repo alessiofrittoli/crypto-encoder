@@ -29,7 +29,7 @@ interface EncodeOptions {
  * - `'RFC4648-HEX'` - [base32hex from RFC4648](https://tools.ietf.org/html/rfc4648)
  * - `'Crockford'` - [Crockford's Base32](http://www.crockford.com/wrmg/base32.html)
  */
-class Base32
+export class Base32
 {
 	/**
 	 * Base32 Variant
@@ -239,6 +239,3 @@ class Base32
 
 	static toString = binaryToString
 }
-
-
-export default Base32

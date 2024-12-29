@@ -16,7 +16,7 @@ export type EncodeInput = (
  * Base64 Utility static class.
  * 
  */
-class Base64
+export class Base64
 {
 	/**
 	 * Encode a string or Buffer to a base64/base64url string.
@@ -103,6 +103,3 @@ class Base64
 
 	static toString = binaryToString
 }
-
-
-export default Base64

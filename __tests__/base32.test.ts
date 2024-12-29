@@ -1,4 +1,4 @@
-import Base32, { type Variant } from '@/Base32'
+import { Base32, type Variant } from '@/Base32'
 
 const tests: ({
 	variant	: Variant
