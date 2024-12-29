@@ -105,7 +105,7 @@ A Base32 encoded string.
 ```ts
 import { Base32 } from '@alessiofrittoli/crypto-encoder'
 // or
-import Base32 from '@alessiofrittoli/crypto-encoder/Base32'
+import { Base32 } from '@alessiofrittoli/crypto-encoder/Base32'
 
 console.log( Base32.encode( 'some value', 'RFC3548' ) )
 // or
@@ -137,7 +137,7 @@ An `ArrayBuffer` containing the decoded data.
 ```ts
 import { Base32 } from '@alessiofrittoli/crypto-encoder'
 // or
-import Base32 from '@alessiofrittoli/crypto-encoder/Base32'
+import { Base32 } from '@alessiofrittoli/crypto-encoder/Base32'
 
 const input		= 'ONXW2ZJAOZQWY5LF'
 const decoded	= Base32.decode( input, 'RFC3548' )
@@ -200,6 +200,10 @@ A Base64 or Base64url encoded string.
 ###### Example
 
 ```ts
+import { Base64 } from '@alessiofrittoli/crypto-encoder'
+// or
+import { Base64 } from '@alessiofrittoli/crypto-encoder/Base64'
+
 const data		= 'Hello, World!'
 const base64	= Base64.encode( data )
 const base64url	= Base64.encode( data, true )
@@ -229,6 +233,10 @@ A `Buffer` containing the decoded data.
 ###### Example
 
 ```ts
+import { Base64 } from '@alessiofrittoli/crypto-encoder'
+// or
+import { Base64 } from '@alessiofrittoli/crypto-encoder/Base64'
+
 const base64	= 'SGVsbG8sIFdvcmxkIQ=='
 const base64url	= 'SGVsbG8sIFdvcmxkIQ'
 
