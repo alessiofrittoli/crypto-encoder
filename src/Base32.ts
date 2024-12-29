@@ -1,5 +1,5 @@
 import { binaryToString } from '@alessiofrittoli/crypto-buffer'
-import toDataView, { type ToDataViewInput } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView, type ToDataViewInput } from '@alessiofrittoli/crypto-buffer/toDataView'
 
 
 /**
@@ -29,7 +29,7 @@ interface EncodeOptions {
  * - `'RFC4648-HEX'` - [base32hex from RFC4648](https://tools.ietf.org/html/rfc4648)
  * - `'Crockford'` - [Crockford's Base32](http://www.crockford.com/wrmg/base32.html)
  */
-class Base32
+export class Base32
 {
 	/**
 	 * Base32 Variant
@@ -211,23 +211,25 @@ class Base32
 	 */
 	private static getDecodeVariantAlphabetAndInput( input: string, variant: Variant )
 	{
+		input = input.replace( /=+$/, '' ).toUpperCase()
+
 		switch ( variant ) {
 			case 'RFC3548':
 			case 'RFC4648':
 				return {
 					alphabet: Base32.ALPHABET.RFC4648,
-					input	: input.replace( /=+$/, '' ),
+					input	: input,
 				} as const
 			case 'RFC4648-HEX':
 				return {
 					alphabet: Base32.ALPHABET.RFC4648_HEX,
-					input	: input.replace( /=+$/, '' ),
+					input	: input,
 				} as const
 			case 'Crockford':
 				return {
 					alphabet: Base32.ALPHABET.CROCKFORD,
 					input	: (
-						input.toUpperCase()
+						input
 							.replace( /O/g, '0' )
 							.replace( /[IL]/g, '1' )
 					),
@@ -239,6 +241,3 @@ class Base32
 
 	static toString = binaryToString
 }
-
-
-export default Base32
