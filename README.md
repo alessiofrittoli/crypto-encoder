@@ -1,6 +1,6 @@
 # Crypto Encoder 🧮
 
-Version 1.1.0
+Version 2.0.0
 
 ## Lightweight TypeScript encoder/decoder library
 
