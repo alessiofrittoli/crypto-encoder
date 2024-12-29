@@ -211,23 +211,25 @@ export class Base32
 	 */
 	private static getDecodeVariantAlphabetAndInput( input: string, variant: Variant )
 	{
+		input = input.replace( /=+$/, '' ).toUpperCase()
+
 		switch ( variant ) {
 			case 'RFC3548':
 			case 'RFC4648':
 				return {
 					alphabet: Base32.ALPHABET.RFC4648,
-					input	: input.replace( /=+$/, '' ),
+					input	: input,
 				} as const
 			case 'RFC4648-HEX':
 				return {
 					alphabet: Base32.ALPHABET.RFC4648_HEX,
-					input	: input.replace( /=+$/, '' ),
+					input	: input,
 				} as const
 			case 'Crockford':
 				return {
 					alphabet: Base32.ALPHABET.CROCKFORD,
 					input	: (
-						input.toUpperCase()
+						input
 							.replace( /O/g, '0' )
 							.replace( /[IL]/g, '1' )
 					),
