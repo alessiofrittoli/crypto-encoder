@@ -1,5 +1,5 @@
 import { binaryToString } from '@alessiofrittoli/crypto-buffer'
-import toDataView, { type ToDataViewInput } from '@alessiofrittoli/crypto-buffer/toDataView'
+import { toDataView, type ToDataViewInput } from '@alessiofrittoli/crypto-buffer/toDataView'
 
 
 /**
