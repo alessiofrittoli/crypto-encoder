@@ -9,6 +9,7 @@ Version 2.0.1
 - [Getting started](#getting-started)
 - [Base32](#base32)
 - [Base64](#base64)
+- [Encoder](#encoder)
 - [Security](#security)
 - [Credits](#made-with-)
 
@@ -29,6 +30,30 @@ pnpm i @alessiofrittoli/crypto-encoder
 ```
 
 ---
+
+### Supported input data types
+
+This module supports different input data types and it uses the `coerceToUint8Array` utility function from [`@alessiofrittoli/crypto-buffer`](https://npmjs.com/package/@alessiofrittoli/crypto-buffer) to convert it to a `Uint8Array`.
+
+Here is the list of supported input data types (typed as `CoerceToUint8ArrayInput`):
+
+- `string`
+- `Array<number>` (array of bytes)
+- `DataView`
+- `Buffer`
+- `ArrayBuffer`
+- `NodeJS.TypedArray`
+	- `Uint8Array`
+	- `Uint8ClampedArray`
+	- `Uint16Array`
+	- `Uint32Array`
+	- `Int8Array`
+	- `Int16Array`
+	- `Int32Array`
+	- `BigUint64Array`
+	- `BigInt64Array`
+	- `Float32Array`
+	- `Float64Array`
 
 ### Base32
 
@@ -89,7 +114,7 @@ Encodes data to a Base32 string.
 
 | Parameter         | Type            | Description                        |
 |-------------------|-----------------|------------------------------------|
-| `data`            | `CoerceToUint8ArrayInput` | The data to encode. |
+| `data`            | `CoerceToUint8ArrayInput` | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
 | `variant`         | `Variant`       | The Base32 variant to use. |
 | `options`         | `EncodeOptions` | (Optional) Encoding options. |
 | `options.padding` | `boolean`       | If set, forcefully enable or disable padding. The default behavior is to follow the default of the selected variant. |
@@ -123,7 +148,7 @@ Decodes a Base32 data.
 
 | Parameter | Type                      | Description                                  |
 |-----------|---------------------------|----------------------------------------------|
-| `data`    | `CoerceToUint8ArrayInput` | The Base32-encoded data.                     |
+| `data`    | `CoerceToUint8ArrayInput` | The Base32-encoded data. See the [list of supported input data types](#supported-input-data-types). |
 | `variant` | `Variant`                 | The Base32 variant used to encode the input. |
 
 ###### Returns
@@ -188,7 +213,7 @@ Encodes data to a Base64 or Base64url string.
 
 | Parameter   | Type            | Default | Description                                   |
 |-------------|-----------------|---------| ----------------------------------------------|
-| `data`      | `CoerceToUint8ArrayInput` | - | The data to encode.                       |
+| `data`      | `CoerceToUint8ArrayInput` | - | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
 | `normalize` | `boolean`       | `false` | Whether to normalize the output to Base64url. |
 
 ###### Returns
@@ -222,11 +247,11 @@ Decodes a Base64 or Base64url string.
 
 | Parameter | Type                      | Description                               |
 |-----------|---------------------------|-------------------------------------------|
-| `data`    | `CoerceToUint8ArrayInput` | The Base64 or Base64url encoded data.     |
+| `data`    | `CoerceToUint8ArrayInput` | The Base64 or Base64url encoded data. See the [list of supported input data types](#supported-input-data-types). |
 
 ###### Returns
 
-Type: `Buffer | Uint6Array`
+Type: `Buffer | Uint8Array`
 
 A `Buffer` containing the decoded data.
 
@@ -244,6 +269,116 @@ console.log( Base64.toString( Base64.decode( base64 ) ) )
 // or
 console.log( Base64.toString( Base64.decode( base64url ) ) )
 // Outputs: 'Hello, World!'
+```
+
+</details>
+
+---
+
+### Encoder
+
+The `Encoder` class provides static methods for encoding and decoding data using various encoding schemes, including custom ones like `base32`.
+
+<details>
+
+<summary>API Reference</summary>
+
+#### **Types**
+
+##### `Encoding`
+
+Represents the encoding types supported by the `Encoder` class. Includes all standard `BufferEncoding` types as well as the custom `base32` encoding.
+
+#### Static Properties
+
+##### `Encoder.SUPPORTED_ENCODINGS`
+
+Type: `Encoding[]`
+
+A list of all encodings supported by the `Encoder` class. Includes standard `BufferEncoding` types and the custom `base32` encoding.
+
+#### Static Methods
+
+##### `Encoder.encode()`
+
+Encodes the provided data using the specified encoding scheme.
+
+###### Parameters
+
+| Parameter       | Type       | Default | Description                                |
+|-----------------|------------|---------| -------------------------------------------|
+| `data`          | `CoerceToUint8ArrayInput` | - | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
+| `encoding`      | `Encoding` | `utf8`  | (Optional) The output encoding.            |
+| `inputEncoding` | `Encoding` | `utf8`  | (Optional) The encoding of the input data. |
+
+###### Returns
+
+Type: `string`
+
+The encoded data as a string.
+
+###### Behavior
+
+- If `encoding` is `base32`, uses the [`Base32`](#base32) class with the `RFC3548` standard.
+- If `encoding` is `base64` or `base64url`, uses the [`Base64`](#base64) class.
+- Otherwise, falls back to `Buffer` (if available) or the `binaryToString` function for encoding.
+
+###### Example
+
+```ts
+import { Encoder } from '@alessiofrittoli/crypto-encoder'
+// or
+import { Encoder } from '@alessiofrittoli/crypto-encoder/Encoder'
+
+const data = 'Hello, world!'
+const buffer = Buffer.from( data )
+const bytes = [
+	72, 101, 108, 108, 111,
+	44,  32, 119, 111, 114,
+	108, 100,  33
+]
+
+console.log( Encoder.encode( data, 'hex' ) )
+console.log( Encoder.encode( data, 'base32' ) )
+console.log( Encoder.encode( data, 'base64' ) )
+console.log( Encoder.encode( buffer ) )
+console.log( Encoder.encode( bytes ) )
+```
+
+---
+
+##### `Encoder.decode()`
+
+Decodes the provided data using the specified encoding scheme.
+
+###### Parameters
+
+| Parameter | Type                      | Description                               |
+|-----------|---------------------------|-------------------------------------------|
+| `data`    | `CoerceToUint8ArrayInput` | The input data to decode. See the [list of supported input data types](#supported-input-data-types). |
+| `encoding`| `Encoding` | The encoding of the input data. |
+
+###### Returns
+
+Type: `Buffer | Uint8Array`
+
+A `Buffer` containing the decoded data.
+
+###### Behavior
+
+- If `encoding` is `base32`, uses the [`Base32`](#base32) class with the `RFC3548` standard.
+- If `encoding` is `base64` or `base64url`, uses the [`Base64`](#base64) class.
+- Otherwise, falls back to `Buffer` (if available) or coerces the input data to a `Uint8Array`.
+
+###### Example
+
+```ts
+import { Base64 } from '@alessiofrittoli/crypto-encoder'
+// or
+import { Base64 } from '@alessiofrittoli/crypto-encoder/Base64'
+
+const decoded = Encoder.decode( 'JBSWY3DPFQQHO33SNRSCC===', 'base32' )
+console.log( Encoder.toString( decoded ) ) // Outputs: 'Hello, world!'
 ```
 
 </details>

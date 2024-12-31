@@ -32,7 +32,7 @@ export class Encoder
 	 *
 	 * @param data - The data to encode. This can be a string, Buffer, or Uint8Array.
 	 * @param encoding - The encoding to use for the output. If not specified, defaults to 'utf8'.
-	 * @param inputEncoding - The encoding of the input data, if it is a string. If not specified, defaults to 'utf8'.
+	 * @param inputEncoding - The encoding of the input data.
 	 * @returns The encoded data as a string.
 	 */
 	static encode( data: CoerceToUint8ArrayInput, encoding?: Encoding, inputEncoding?: Encoding )
@@ -53,7 +53,7 @@ export class Encoder
 	 * Decodes the given data using the specified encoding.
 	 *
 	 * @param data - The data to decode.
-	 * @param encoding - The encoding of the input data. If not specified, defaults to 'utf8'.
+	 * @param encoding - The encoding of the input data.
 	 * @returns The decoded data as a Uint8Array.
 	 */
 	static decode( data: CoerceToUint8ArrayInput, encoding?: Encoding )
@@ -64,8 +64,11 @@ export class Encoder
 			: ( encoding === 'base64' || encoding === 'base64url' )
 				? Base64.decode( data )
 			: encoding != null && typeof Buffer !== 'undefined'
-				? new Uint8Array( Buffer.from( binaryToString( coerceToUint8Array( data ) ), encoding ) )
+				? Buffer.from( binaryToString( coerceToUint8Array( data ) ), encoding )
 				: coerceToUint8Array( data )
 		)
 	}
+
+
+	static toString = binaryToString
 }
