@@ -309,7 +309,7 @@ Encodes the provided data using the specified encoding scheme.
 |-----------------|------------|---------| -------------------------------------------|
 | `data`          | `CoerceToUint8ArrayInput` | - | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
 | `encoding`      | `Encoding` | `utf8`  | (Optional) The output encoding.            |
-| `inputEncoding` | `Encoding` | `utf8`  | (Optional) The encoding of the input data. |
+| `inputEncoding` | `Encoding` | -       | (Optional) The encoding of the input data. |
 
 ###### Returns
 
@@ -373,9 +373,9 @@ A `Buffer` containing the decoded data.
 ###### Example
 
 ```ts
-import { Base64 } from '@alessiofrittoli/crypto-encoder'
+import { Encoder } from '@alessiofrittoli/crypto-encoder'
 // or
-import { Base64 } from '@alessiofrittoli/crypto-encoder/Base64'
+import { Encoder } from '@alessiofrittoli/crypto-encoder/Encoder'
 
 const decoded = Encoder.decode( 'JBSWY3DPFQQHO33SNRSCC===', 'base32' )
 console.log( Encoder.toString( decoded ) ) // Outputs: 'Hello, world!'
