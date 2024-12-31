@@ -89,7 +89,7 @@ Encodes data to a Base32 string.
 
 | Parameter         | Type            | Description                        |
 |-------------------|-----------------|------------------------------------|
-| `data`            | `string \| number[] \| ArrayLike<number> \| ArrayBuffer \| Int8Array \| Int16Array \| Int32Array \| Uint8Array \| Uint16Array \| Uint32Array \| Uint8ClampedArray` | The data to encode. |
+| `data`            | `CoerceToUint8ArrayInput` | The data to encode. |
 | `variant`         | `Variant`       | The Base32 variant to use. |
 | `options`         | `EncodeOptions` | (Optional) Encoding options. |
 | `options.padding` | `boolean`       | If set, forcefully enable or disable padding. The default behavior is to follow the default of the selected variant. |
@@ -117,20 +117,20 @@ console.log( Base32.encode( 'some value', Base32.VARIANT.RFC3548 ) )
 
 ##### `Base32.decode()`
 
-Decodes a Base32 string to binary data.
+Decodes a Base32 data.
 
 ###### Parameters
 
-| Parameter         | Type            | Description                                  |
-|-------------------|-----------------|----------------------------------------------|
-| `input`           | `string`        | The Base32-encoded string.                   |
-| `variant`         | `Variant`       | The Base32 variant used to encode the input. |
+| Parameter | Type                      | Description                                  |
+|-----------|---------------------------|----------------------------------------------|
+| `data`    | `CoerceToUint8ArrayInput` | The Base32-encoded data.                     |
+| `variant` | `Variant`                 | The Base32 variant used to encode the input. |
 
 ###### Returns
 
-Type: `ArrayBuffer`
+Type: `Uint8Array`
 
-An `ArrayBuffer` containing the decoded data.
+An `Uint8Array` containing the decoded data.
 
 ###### Example usage
 
@@ -186,10 +186,10 @@ Encodes data to a Base64 or Base64url string.
 
 ###### Parameters
 
-| Parameter | Type            | Default | Description                                   |
-|-----------|-----------------|---------| ----------------------------------------------|
-| `input`   | `string \| number[] \| Buffer \| ArrayBuffer \| Int8Array \| Int16Array \| Int32Array \| Uint8Array \| Uint16Array \| Uint32Array \| Uint8ClampedArray` | -       | The data to encode. |
-| `normalize` | `boolean`       | `false`  | Whether to normalize the output to Base64url. |
+| Parameter   | Type            | Default | Description                                   |
+|-------------|-----------------|---------| ----------------------------------------------|
+| `data`      | `CoerceToUint8ArrayInput` | - | The data to encode.                       |
+| `normalize` | `boolean`       | `false` | Whether to normalize the output to Base64url. |
 
 ###### Returns
 
@@ -220,13 +220,13 @@ Decodes a Base64 or Base64url string.
 
 ###### Parameters
 
-| Parameter | Type     | Description                               |
-|-----------|----------|-------------------------------------------|
-| `data`    | `string` | The Base64 or Base64url string to decode. |
+| Parameter | Type                      | Description                               |
+|-----------|---------------------------|-------------------------------------------|
+| `data`    | `CoerceToUint8ArrayInput` | The Base64 or Base64url encoded data.     |
 
 ###### Returns
 
-Type: `Buffer`
+Type: `Buffer | Uint6Array`
 
 A `Buffer` containing the decoded data.
 

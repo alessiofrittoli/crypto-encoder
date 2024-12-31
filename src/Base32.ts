@@ -119,20 +119,20 @@ export class Base32
 
 
 	/**
-	 * Decode a Base32 string.
+	 * Decode a Base32 data.
 	 * 
-	 * @param	input	The input data to decode.
+	 * @param	data	The input data to decode.
 	 * @param	variant	The Variant used to encode the given input.
 	 * @returns	The `ArrayBuffer` result of decoded `input`.
 	 */
-	static decode( input: string, variant: Variant )
+	static decode( data: CoerceToUint8ArrayInput, variant: Variant )
 	{
 		
 		let bits	= 0
 		let value	= 0
 		let index	= 0
 		
-		const parsed		= Base32.getDecodeVariantAlphabetAndInput( input, variant )
+		const parsed		= Base32.getDecodeVariantAlphabetAndInput( data, variant )
 		const { length }	= parsed.input
 		const output		= new Uint8Array( ( length * 5 / 8 ) | 0 )
 
@@ -146,7 +146,7 @@ export class Base32
 			}
 		}
 
-		return output.buffer
+		return output
 	}
 
 
@@ -207,9 +207,12 @@ export class Base32
 	 * @param	variant	The Base32 Variant.
 	 * @returns	An object with `alphabet` and parsed `input` based on the given `variant`.
 	 */
-	private static getDecodeVariantAlphabetAndInput( input: string, variant: Variant )
+	private static getDecodeVariantAlphabetAndInput( input: CoerceToUint8ArrayInput, variant: Variant )
 	{
-		input = input.replace( /=+$/, '' ).toUpperCase()
+		input = (
+			Base32.toString( input )
+				.replace( /=+$/, '' ).toUpperCase()
+		)
 
 		switch ( variant ) {
 			case 'RFC3548':
