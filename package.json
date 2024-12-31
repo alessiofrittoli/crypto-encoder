@@ -37,6 +37,11 @@
 			"import": "./dist/index.mjs",
 			"require": "./dist/index.js"
 		},
+		"./Encoder": {
+			"types": "./dist/Encoder.d.ts",
+			"import": "./dist/Encoder.mjs",
+			"require": "./dist/Encoder.js"
+		},
 		"./Base32": {
 			"types": "./dist/Base32.d.ts",
 			"import": "./dist/Base32.mjs",
@@ -70,7 +75,9 @@
 		"test:base32": "pnpm test base32.test.ts",
 		"test:base32:jsdom": "JSDOM=true pnpm test:base32",
 		"test:base64": "pnpm test base64.test.ts",
-		"test:base64:jsdom": "JSDOM=true pnpm test:base64"
+		"test:base64:jsdom": "JSDOM=true pnpm test:base64",
+		"test:encoder": "pnpm test encoder.test.ts",
+		"test:encoder:jsdom": "JSDOM=true pnpm test:encoder"
 	},
 	"devDependencies": {
 		"@alessiofrittoli/node-scripts": "^2.2.1",
