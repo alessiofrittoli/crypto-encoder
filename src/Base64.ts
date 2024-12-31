@@ -22,14 +22,14 @@ export class Base64
 	/**
 	 * Encode a string or Buffer to a base64/base64url string.
 	 *
-	 * @param	input		The data to encode.
+	 * @param	data		The data to encode.
 	 * @param	normalize	( Optional ) Whether to normalize the string to base64url. Default: `false`.
 	 * 
 	 * @returns	The encoded base64url ( or base64 if `normalize` is set to false ) string.
 	 */
-	static encode( input: CoerceToUint8ArrayInput, normalize: boolean = false )
+	static encode( data: CoerceToUint8ArrayInput, normalize: boolean = false )
 	{
-		const buffer = coerceToUint8Array( input )
+		const buffer = coerceToUint8Array( data )
 
 		return (
 			typeof window !== 'undefined' ? (
@@ -49,14 +49,15 @@ export class Base64
 
 
 	/**
-	 * Decode a base64url string.
+	 * Decode a base64url data.
 	 *
 	 * @param	data The data to decode.
 	 * 
-	 * @returns	The decoded base64url string Buffer.
+	 * @returns	The decoded base64url Buffer.
 	 */
-	static decode( data: string )
+	static decode( data: CoerceToUint8ArrayInput )
 	{
+		data = Base64.toString( data )
 		return (
 			typeof window !== 'undefined'
 				? coerceToUint8Array( window.atob( Base64.fromBase64url( data ) ) )
