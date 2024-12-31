@@ -1,6 +1,4 @@
-import { binaryToString } from '@alessiofrittoli/crypto-buffer'
-import { toDataView, type ToDataViewInput } from '@alessiofrittoli/crypto-buffer/toDataView'
-
+import { binaryToString, coerceToUint8Array, type CoerceToUint8ArrayInput } from '@alessiofrittoli/crypto-buffer'
 
 /**
  * Base32 Variant
@@ -80,7 +78,7 @@ export class Base32
 	 * - `'Crockford'` - [Crockford's Base32](http://www.crockford.com/wrmg/base32.html)
 	 */
 	static encode(
-		data		: ToDataViewInput,
+		data		: CoerceToUint8ArrayInput,
 		variant		: Variant,
 		options?	: EncodeOptions,
 	)
@@ -89,14 +87,14 @@ export class Base32
 
 		const resolved	= Base32.getEncodeVariantAlphabetAndPadding( variant )
 		const padding	= options.padding ?? resolved.padding
-		const view		= toDataView( data )
+		const buffer	= coerceToUint8Array( data )
 		
 		let bits	= 0
 		let value	= 0
 		let output	= ''
 		
-		for ( let i = 0; i < view.byteLength; i++ ) {
-			value	= ( value << 8 ) | view.getUint8( i )
+		for ( let i = 0; i < buffer.byteLength; i++ ) {
+			value	= ( value << 8 ) | buffer[ i ]!
 			bits	+= 8
 		
 			while ( bits >= 5 ) {

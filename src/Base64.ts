@@ -1,4 +1,5 @@
-import { binaryToString, coerceToUint8Array, stringToBinary, stringToBytes } from '@alessiofrittoli/crypto-buffer'
+import { binaryToString, coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
+import type { CoerceToUint8ArrayInput } from '@alessiofrittoli/crypto-buffer'
 
 /**
  * The {@link Base64.encode} supported input Type.
@@ -26,22 +27,20 @@ export class Base64
 	 * 
 	 * @returns	The encoded base64url ( or base64 if `normalize` is set to false ) string.
 	 */
-	static encode( input: EncodeInput, normalize: boolean = false )
+	static encode( input: CoerceToUint8ArrayInput, normalize: boolean = false )
 	{
-		if ( typeof input === 'string' ) {
-			input = stringToBytes( input )
-		}
+		const buffer = coerceToUint8Array( input )
 
 		return (
 			typeof window !== 'undefined' ? (
 				Base64.fromBase64(
 					window.btoa(
-						binaryToString( input )
+						binaryToString( buffer )
 					), normalize
 				)
 			) : (
 				Base64.fromBase64(
-					Buffer.from( coerceToUint8Array( input ) )
+					Buffer.from( buffer )
 						.toString( normalize ? 'base64url' : 'base64' )
 				, normalize )
 			)
@@ -60,7 +59,7 @@ export class Base64
 	{
 		return (
 			typeof window !== 'undefined'
-				? stringToBinary( window.atob( Base64.fromBase64url( data ) ) )
+				? coerceToUint8Array( window.atob( Base64.fromBase64url( data ) ) )
 				: Buffer.from( Base64.fromBase64url( data ), 'base64' )
 		)
 	}
