@@ -1,6 +1,21 @@
 # Crypto Encoder 🧮
 
-Version 2.1.1
+[![NPM Latest Version][version-badge]][npm-url] [![Coverage Status][coverage-badge]][coverage-url] [![Socket Status][socket-badge]][socket-url] [![NPM Monthly Downloads][downloads-badge]][npm-url] [![Dependencies][deps-badge]][deps-url]
+
+[![GitHub Sponsor][sponsor-badge]][sponsor-url]
+
+[version-badge]: https://img.shields.io/npm/v/%40alessiofrittoli%2Fcrypto-encoder
+[npm-url]: https://npmjs.org/package/%40alessiofrittoli%2Fcrypto-encoder
+[coverage-badge]: https://coveralls.io/repos/github/alessiofrittoli/crypto-encoder/badge.svg
+[coverage-url]: https://coveralls.io/github/alessiofrittoli/crypto-encoder
+[socket-badge]: https://socket.dev/api/badge/npm/package/@alessiofrittoli/crypto-encoder
+[socket-url]: https://socket.dev/npm/package/@alessiofrittoli/crypto-encoder/overview
+[downloads-badge]: https://img.shields.io/npm/dm/%40alessiofrittoli%2Fcrypto-encoder.svg
+[deps-badge]: https://img.shields.io/librariesio/release/npm/%40alessiofrittoli%2Fcrypto-encoder
+[deps-url]: https://libraries.io/npm/%40alessiofrittoli%2Fcrypto-encoder
+
+[sponsor-badge]: https://img.shields.io/static/v1?label=Fund%20this%20package&message=%E2%9D%A4&logo=GitHub&color=%23DB61A2
+[sponsor-url]: https://github.com/sponsors/alessiofrittoli
 
 ## Lightweight TypeScript encoder/decoder library
 
@@ -10,6 +25,12 @@ Version 2.1.1
 - [Base32](#base32)
 - [Base64](#base64)
 - [Encoder](#encoder)
+- [Development](#development)
+  - [Install depenendencies](#install-depenendencies)
+  - [Build the source code](#build-the-source-code)
+  - [ESLint](#eslint)
+  - [Jest](#jest)
+- [Contributing](#contributing)
 - [Security](#security)
 - [Credits](#made-with-)
 
@@ -43,17 +64,17 @@ Here is the list of supported input data types (typed as `CoerceToUint8ArrayInpu
 - `Buffer`
 - `ArrayBuffer`
 - `NodeJS.TypedArray`
-	- `Uint8Array`
-	- `Uint8ClampedArray`
-	- `Uint16Array`
-	- `Uint32Array`
-	- `Int8Array`
-	- `Int16Array`
-	- `Int32Array`
-	- `BigUint64Array`
-	- `BigInt64Array`
-	- `Float32Array`
-	- `Float64Array`
+    - `Uint8Array`
+    - `Uint8ClampedArray`
+    - `Uint16Array`
+    - `Uint32Array`
+    - `Int8Array`
+    - `Int16Array`
+    - `Int32Array`
+    - `BigUint64Array`
+    - `BigInt64Array`
+    - `Float32Array`
+    - `Float64Array`
 
 ### Base32
 
@@ -97,10 +118,10 @@ An object containing the available Base32 variants:
 
 ```ts
 Base32.VARIANT = {
-	RFC3548		: 'RFC3548',
-	RFC4648		: 'RFC4648',
-	RFC4648_HEX	: 'RFC4648-HEX',
-	Crockford	: 'Crockford',
+    RFC3548		: 'RFC3548',
+    RFC4648		: 'RFC4648',
+    RFC4648_HEX	: 'RFC4648-HEX',
+    Crockford	: 'Crockford',
 }
 ```
 
@@ -333,9 +354,9 @@ import { Encoder } from '@alessiofrittoli/crypto-encoder/Encoder'
 const data = 'Hello, world!'
 const buffer = Buffer.from( data )
 const bytes = [
-	72, 101, 108, 108, 111,
-	44,  32, 119, 111, 114,
-	108, 100,  33
+    72, 101, 108, 108, 111,
+    44,  32, 119, 111, 114,
+    108, 100,  33
 ]
 
 console.log( Encoder.encode( data, 'hex' ) )
@@ -385,7 +406,7 @@ console.log( Encoder.toString( decoded ) ) // Outputs: 'Hello, world!'
 
 ---
 
-<!-- ### Development
+### Development
 
 #### Install depenendencies
 
@@ -399,9 +420,9 @@ or using `pnpm`
 pnpm i
 ```
 
-#### Build your source code
+#### Build the source code
 
-Run the following command to build code for distribution.
+Run the following command to test and build code for distribution.
 
 ```bash
 pnpm build
@@ -421,28 +442,50 @@ Run all the defined test suites by running the following:
 
 ```bash
 # Run tests and watch file changes.
-pnpm test
+pnpm test:watch
+
+# Run tests and watch file changes with jest-environment-jsdom.
+pnpm test:jsdom
 
 # Run tests in a CI environment.
 pnpm test:ci
+
+# Run tests in a CI environment with jest-environment-jsdom.
+pnpm test:ci:jsdom
 ```
 
 You can eventually run specific suits like so:
 
+- See [`package.json`](./package.json) file scripts for more info.
+
 ```bash
 pnpm test:jest
-pnpm test:base64
-pnpm test:base64:jsdom
+pnpm test:jest:jsdom
+```
+
+Run tests with coverage.
+
+An HTTP server is then started to serve coverage files from `./coverage` folder.
+
+⚠️ You may see a blank page the first time you run this command. Simply refresh the browser to see the updates.
+
+```bash
+test:coverage:serve
 ```
 
 ---
 
 ### Contributing
 
-Contributions are truly welcome!\
+Contributions are truly welcome!
+
 Please refer to the [Contributing Doc](./CONTRIBUTING.md) for more information on how to start contributing to this project.
 
---- -->
+Help keep this project up to date with [GitHub Sponsor][sponsor-url].
+
+[![GitHub Sponsor][sponsor-badge]][sponsor-url]
+
+---
 
 ### Security
 
@@ -451,30 +494,30 @@ If you believe you have found a security vulnerability, we encourage you to **_r
 ### Made with ☕
 
 <table style='display:flex;gap:20px;'>
-	<tbody>
-		<tr>
-			<td>
-				<img src='https://avatars.githubusercontent.com/u/35973186' style='width:60px;border-radius:50%;object-fit:contain;'>
-			</td>
-			<td>
-				<table style='display:flex;gap:2px;flex-direction:column;'>
-					<tbody>
-						<tr>
-							<td>
-								<a href='https://github.com/alessiofrittoli' target='_blank' rel='noopener'>Alessio Frittoli</a>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<small>
-									<a href='https://alessiofrittoli.it' target='_blank' rel='noopener'>https://alessiofrittoli.it</a> |
-									<a href='mailto:info@alessiofrittoli.it' target='_blank' rel='noopener'>info@alessiofrittoli.it</a>
-								</small>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-	</tbody>
+  <tbody>
+    <tr>
+      <td>
+        <img alt="avatar" src='https://avatars.githubusercontent.com/u/35973186' style='width:60px;border-radius:50%;object-fit:contain;'>
+      </td>
+      <td>
+        <table style='display:flex;gap:2px;flex-direction:column;'>
+          <tbody>
+              <tr>
+                <td>
+                  <a href='https://github.com/alessiofrittoli' target='_blank' rel='noopener'>Alessio Frittoli</a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <small>
+                    <a href='https://alessiofrittoli.it' target='_blank' rel='noopener'>https://alessiofrittoli.it</a> |
+                    <a href='mailto:info@alessiofrittoli.it' target='_blank' rel='noopener'>info@alessiofrittoli.it</a>
+                  </small>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
 </table>
