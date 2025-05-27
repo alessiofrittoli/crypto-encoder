@@ -235,7 +235,7 @@ Encodes data to a Base64 or Base64url string.
 | Parameter   | Type            | Default | Description                                   |
 |-------------|-----------------|---------| ----------------------------------------------|
 | `data`      | `CoerceToUint8ArrayInput` | - | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
-| `normalize` | `boolean`       | `false` | Whether to normalize the output to Base64url. |
+| `normalize` | `boolean`       | `true` | Whether to normalize the output to Base64url. |
 
 ###### Returns
 
@@ -251,8 +251,8 @@ import { Base64 } from '@alessiofrittoli/crypto-encoder'
 import { Base64 } from '@alessiofrittoli/crypto-encoder/Base64'
 
 const data		= 'Hello, World!'
-const base64	= Base64.encode( data )
-const base64url	= Base64.encode( data, true )
+const base64	= Base64.encode( data, false )
+const base64url	= Base64.encode( data )
 
 console.log( base64 ) // Outputs: 'SGVsbG8sIFdvcmxkIQ=='
 console.log( base64url ) // Outputs: 'SGVsbG8sIFdvcmxkIQ'

@@ -1,17 +1,6 @@
 import { binaryToString, coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
 import type { CoerceToUint8ArrayInput } from '@alessiofrittoli/crypto-buffer'
 
-/**
- * The {@link Base64.encode} supported input Type.
- */
-export type EncodeInput = (
-	| string
-	| Array<number>
-	| Buffer
-	| ArrayBuffer
-	| NodeJS.TypedArray
-)
-
 
 /**
  * Base64 Utility static class.
@@ -23,11 +12,11 @@ export class Base64
 	 * Encode a string or Buffer to a base64/base64url string.
 	 *
 	 * @param	data		The data to encode.
-	 * @param	normalize	( Optional ) Whether to normalize the string to base64url. Default: `false`.
+	 * @param	normalize	( Optional ) Whether to normalize the string to base64url. Default: `true`.
 	 * 
 	 * @returns	The encoded base64url ( or base64 if `normalize` is set to false ) string.
 	 */
-	static encode( data: CoerceToUint8ArrayInput, normalize: boolean = false )
+	static encode( data: CoerceToUint8ArrayInput, normalize: boolean = true )
 	{
 		const buffer = coerceToUint8Array( data )
 

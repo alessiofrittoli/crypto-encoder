@@ -46,85 +46,85 @@ export const runBase64UnitTests = () => {
 		describe( 'Base64.encode()', () => {
 		
 			it( 'encodes to base64' + clientSuffix, () => {		
-				expect( Base64.encode( str.value ) )
+				expect( Base64.encode( str.value, false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes to base64url' + clientSuffix, () => {
-				expect( Base64.encode( str.value, true ) )
+				expect( Base64.encode( str.value ) )
 					.toBe( str.base64url )
 			} )
 		
 		
 			it( 'encodes Array of bytes to base64' + clientSuffix, () => {
-				expect( Base64.encode( stringToBytes( str.value ) ) )
+				expect( Base64.encode( stringToBytes( str.value ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Buffer to base64' + clientSuffix, () => {
-				expect( Base64.encode( Buffer.from( str.value, 'utf-8' ) ) )
+				expect( Base64.encode( Buffer.from( str.value, 'utf-8' ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes ArrayBuffer to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Uint8Array( stringToBytes( str.value ) ).buffer ) )
+				expect( Base64.encode( new Uint8Array( stringToBytes( str.value ) ).buffer, false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Int8Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Int8Array( stringToBytes( str.value ) ) ) )
+				expect( Base64.encode( new Int8Array( stringToBytes( str.value ) ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Int16Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Int16Array( stringToBytes( str.value ) ) ) )
+				expect( Base64.encode( new Int16Array( stringToBytes( str.value ) ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Int32Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Int32Array( stringToBytes( str.value ) ) ) )
+				expect( Base64.encode( new Int32Array( stringToBytes( str.value ) ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Uint8Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Uint8Array( stringToBytes( str.value ) ) ) )
+				expect( Base64.encode( new Uint8Array( stringToBytes( str.value ) ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Uint16Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Uint16Array( stringToBytes( str.value ) ) ) )
+				expect( Base64.encode( new Uint16Array( stringToBytes( str.value ) ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Uint32Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Uint32Array( stringToBytes( str.value ) ) ) )
+				expect( Base64.encode( new Uint32Array( stringToBytes( str.value ) ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Uint8ClampedArray to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Uint8ClampedArray( stringToBytes( str.value ) ) ) )
+				expect( Base64.encode( new Uint8ClampedArray( stringToBytes( str.value ) ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes BigInt64Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( coerceToBigInt64Array( str.value ) ) )
+				expect( Base64.encode( coerceToBigInt64Array( str.value ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes BigUint64Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( coerceToBigUint64Array( str.value ) ) )
+				expect( Base64.encode( coerceToBigUint64Array( str.value ), false ) )
 					.toBe( str.base64 )
 			} )
 		
