@@ -1,4 +1,4 @@
-import { binaryToString, coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
+import { binaryToBinaryString, binaryToString, coerceToUint8Array } from '@alessiofrittoli/crypto-buffer'
 import type { CoerceToUint8ArrayInput } from '@alessiofrittoli/crypto-buffer'
 
 
@@ -24,7 +24,7 @@ export class Base64
 			typeof window !== 'undefined' ? (
 				Base64.fromBase64(
 					window.btoa(
-						binaryToString( buffer )
+						binaryToBinaryString( buffer )
 					), normalize
 				)
 			) : (
