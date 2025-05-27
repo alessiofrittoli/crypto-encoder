@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@alessiofrittoli/crypto-buffer':
-        specifier: 3.6.1
-        version: 3.6.1
+        specifier: 3.6.2
+        version: 3.6.2
       '@alessiofrittoli/type-utils':
         specifier: ^1.8.0
         version: 1.8.0
@@ -72,8 +72,8 @@ packages:
   '@alessiofrittoli/chain-functions@2.3.0':
     resolution: {integrity: sha512-kbOhe6q9jlNLpe93KDSFxh0atsw3fa9Hi6VlA2OnzA28Te6iBw7ZkwFT5FTwBx2vtlBHY9fa8t5UtTMkBR8Flg==}
 
-  '@alessiofrittoli/crypto-buffer@3.6.1':
-    resolution: {integrity: sha512-w9jcgED5lOte3zbU8pRPVdYvVSFBuad2lyTgzc38Da3h2ZeC334uOK1e6xuwZGgHGngdMP+5Q/frmfUNko2Ccw==}
+  '@alessiofrittoli/crypto-buffer@3.6.2':
+    resolution: {integrity: sha512-m6krPN75GY5PDSTMqpifdMBtjm0tTyFvEBakbLnff9odwkXgz7zGsZfsVeyxGpWy4pwrX/KEYmSawx0rT0uu/g==}
 
   '@alessiofrittoli/node-scripts@2.5.0':
     resolution: {integrity: sha512-K6o0ZJgWb8HAbiBU7ajdlNY8UsrAlcLHO2WAx9pPoxjLKC/QR/PnNE+zLgc+z1q4TefS2UsS1VsUAUjQI/Ro4g==}
@@ -2490,7 +2490,7 @@ snapshots:
 
   '@alessiofrittoli/chain-functions@2.3.0': {}
 
-  '@alessiofrittoli/crypto-buffer@3.6.1': {}
+  '@alessiofrittoli/crypto-buffer@3.6.2': {}
 
   '@alessiofrittoli/node-scripts@2.5.0': {}
 
