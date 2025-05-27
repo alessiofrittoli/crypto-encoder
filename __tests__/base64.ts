@@ -37,7 +37,7 @@ export const runBase64UnitTests = () => {
 		
 			it( test$1, () => {
 				expect( Base64.fromBase64url( str.base64url ) )
-					.toBe( str.base64.replace( /=/g, '' ) )
+					.toBe( str.base64 )
 			} )
 		
 		} )
