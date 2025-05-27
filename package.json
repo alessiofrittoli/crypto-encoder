@@ -94,7 +94,7 @@
 		"@eslint/js": "^9.27.0",
 		"@jest/globals": "^29.7.0",
 		"@types/jest": "^29.5.14",
-		"@types/node": "^22.15.22",
+		"@types/node": "^22.15.23",
 		"concurrently": "^9.1.2",
 		"dotenv": "^16.5.0",
 		"eslint": "^9.27.0",
@@ -109,7 +109,7 @@
 		"typescript-eslint": "^8.33.0"
 	},
 	"dependencies": {
-		"@alessiofrittoli/crypto-buffer": "3.6.0",
+		"@alessiofrittoli/crypto-buffer": "3.6.1",
 		"@alessiofrittoli/type-utils": "^1.8.0"
 	},
 	"pnpm": {
