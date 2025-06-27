@@ -111,12 +111,5 @@
 	"dependencies": {
 		"@alessiofrittoli/crypto-buffer": "3.7.0",
 		"@alessiofrittoli/type-utils": "^1.8.0"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@alessiofrittoli/type-utils",
-			"esbuild",
-			"unrs-resolver"
-		]
 	}
 }
