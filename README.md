@@ -56,25 +56,7 @@ pnpm i @alessiofrittoli/crypto-encoder
 
 This module supports different input data types and it uses the `coerceToUint8Array` utility function from [`@alessiofrittoli/crypto-buffer`](https://npmjs.com/package/@alessiofrittoli/crypto-buffer) to convert it to a `Uint8Array`.
 
-Here is the list of supported input data types (typed as `CoerceToUint8ArrayInput`):
-
-- `string`
-- `Array<number>` (array of bytes)
-- `DataView`
-- `Buffer`
-- `ArrayBuffer`
-- `NodeJS.TypedArray`
-    - `Uint8Array`
-    - `Uint8ClampedArray`
-    - `Uint16Array`
-    - `Uint32Array`
-    - `Int8Array`
-    - `Int16Array`
-    - `Int32Array`
-    - `BigUint64Array`
-    - `BigInt64Array`
-    - `Float32Array`
-    - `Float64Array`
+See [`CoerceToUint8ArrayInput`](https://npmjs.com/package/@alessiofrittoli/crypto-buffer#input-type-1) for a list of supported input data types.
 
 ### Base32
 
