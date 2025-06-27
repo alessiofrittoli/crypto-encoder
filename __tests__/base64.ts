@@ -1,5 +1,7 @@
 import { Base64 } from '@/Base64'
 import { stringToBytes } from '@alessiofrittoli/crypto-buffer'
+import { coerceToInt16Array, coerceToUint16Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToInt32Array, coerceToUint32Array } from '@alessiofrittoli/crypto-buffer'
 import { coerceToBigInt64Array, coerceToBigUint64Array, } from '@alessiofrittoli/crypto-buffer'
 
 const str: {
@@ -82,13 +84,13 @@ export const runBase64UnitTests = () => {
 		
 		
 			it( 'encodes Int16Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Int16Array( stringToBytes( str.value ) ), false ) )
+				expect( Base64.encode( coerceToInt16Array( str.value ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Int32Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Int32Array( stringToBytes( str.value ) ), false ) )
+				expect( Base64.encode( coerceToInt32Array( str.value ), false ) )
 					.toBe( str.base64 )
 			} )
 		
@@ -100,13 +102,13 @@ export const runBase64UnitTests = () => {
 		
 		
 			it( 'encodes Uint16Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Uint16Array( stringToBytes( str.value ) ), false ) )
+				expect( Base64.encode( coerceToUint16Array( str.value ), false ) )
 					.toBe( str.base64 )
 			} )
 		
 		
 			it( 'encodes Uint32Array to base64' + clientSuffix, () => {
-				expect( Base64.encode( new Uint32Array( stringToBytes( str.value ) ), false ) )
+				expect( Base64.encode( coerceToUint32Array( str.value ), false ) )
 					.toBe( str.base64 )
 			} )
 		
