@@ -39,24 +39,44 @@
 	],
 	"exports": {
 		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.js"
+			"import": {
+				"types": "./dist/index.d.mts",
+				"default": "./dist/index.mjs"
+			},
+			"require": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			}
 		},
 		"./Encoder": {
-			"types": "./dist/Encoder.d.ts",
-			"import": "./dist/Encoder.mjs",
-			"require": "./dist/Encoder.js"
+			"import": {
+				"types": "./dist/Encoder.d.mts",
+				"default": "./dist/Encoder.mjs"
+			},
+			"require": {
+				"types": "./dist/Encoder.d.ts",
+				"default": "./dist/Encoder.js"
+			}
 		},
 		"./Base32": {
-			"types": "./dist/Base32.d.ts",
-			"import": "./dist/Base32.mjs",
-			"require": "./dist/Base32.js"
+			"import": {
+				"types": "./dist/Base32.d.mts",
+				"default": "./dist/Base32.mjs"
+			},
+			"require": {
+				"types": "./dist/Base32.d.ts",
+				"default": "./dist/Base32.js"
+			}
 		},
 		"./Base64": {
-			"types": "./dist/Base64.d.ts",
-			"import": "./dist/Base64.mjs",
-			"require": "./dist/Base64.js"
+			"import": {
+				"types": "./dist/Base64.d.mts",
+				"default": "./dist/Base64.mjs"
+			},
+			"require": {
+				"types": "./dist/Base64.d.ts",
+				"default": "./dist/Base64.js"
+			}
 		}
 	},
 	"sideEffects": false,
@@ -90,26 +110,26 @@
 		"test:encoder": "pnpm test:watch encoder.test.ts"
 	},
 	"devDependencies": {
-		"@alessiofrittoli/node-scripts": "^2.6.0",
-		"@eslint/js": "^9.29.0",
-		"@jest/globals": "^30.0.3",
+		"@alessiofrittoli/node-scripts": "^3.2.0",
+		"@eslint/js": "^9.39.1",
+		"@jest/globals": "^30.2.0",
 		"@types/jest": "^30.0.0",
-		"@types/node": "^24.0.4",
-		"concurrently": "^9.2.0",
-		"dotenv": "^16.6.0",
-		"eslint": "^9.29.0",
-		"globals": "^16.2.0",
+		"@types/node": "^24.10.1",
+		"concurrently": "^9.2.1",
+		"dotenv": "^17.2.3",
+		"eslint": "^9.39.1",
+		"globals": "^16.5.0",
 		"http-server": "^14.1.1",
-		"jest": "^30.0.3",
-		"jest-environment-jsdom": "^30.0.2",
-		"ts-jest": "^29.4.0",
+		"jest": "^30.2.0",
+		"jest-environment-jsdom": "^30.2.0",
+		"ts-jest": "^29.4.6",
 		"ts-node": "^10.9.2",
-		"tsup": "^8.5.0",
-		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.35.0"
+		"tsup": "^8.5.1",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.48.1"
 	},
 	"dependencies": {
-		"@alessiofrittoli/crypto-buffer": "3.7.0",
-		"@alessiofrittoli/type-utils": "^1.8.0"
+		"@alessiofrittoli/crypto-buffer": "3.8.0",
+		"@alessiofrittoli/type-utils": "^1.9.0"
 	}
 }
