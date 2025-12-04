@@ -110,7 +110,7 @@
 		"test:encoder": "pnpm test:watch encoder.test.ts"
 	},
 	"devDependencies": {
-		"@alessiofrittoli/node-scripts": "^3.2.0",
+		"@alessiofrittoli/node-scripts": "^3.3.0",
 		"@eslint/js": "^9.39.1",
 		"@jest/globals": "^30.2.0",
 		"@types/jest": "^30.0.0",
