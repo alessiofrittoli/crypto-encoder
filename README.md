@@ -13,7 +13,6 @@
 [downloads-badge]: https://img.shields.io/npm/dm/%40alessiofrittoli%2Fcrypto-encoder.svg
 [deps-badge]: https://img.shields.io/librariesio/release/npm/%40alessiofrittoli%2Fcrypto-encoder
 [deps-url]: https://libraries.io/npm/%40alessiofrittoli%2Fcrypto-encoder
-
 [sponsor-badge]: https://img.shields.io/static/v1?label=Fund%20this%20package&message=%E2%9D%A4&logo=GitHub&color=%23DB61A2
 [sponsor-url]: https://github.com/sponsors/alessiofrittoli
 
@@ -26,7 +25,7 @@
 - [Base64](#base64)
 - [Encoder](#encoder)
 - [Development](#development)
-  - [Install depenendencies](#install-depenendencies)
+  - [Install dependencies](#install-dependencies)
   - [Build the source code](#build-the-source-code)
   - [ESLint](#eslint)
   - [Jest](#jest)
@@ -100,10 +99,10 @@ An object containing the available Base32 variants:
 
 ```ts
 Base32.VARIANT = {
-    RFC3548		: 'RFC3548',
-    RFC4648		: 'RFC4648',
-    RFC4648_HEX	: 'RFC4648-HEX',
-    Crockford	: 'Crockford',
+  RFC3548: 'RFC3548',
+  RFC4648: 'RFC4648',
+  RFC4648_HEX: 'RFC4648-HEX',
+  Crockford: 'Crockford',
 }
 ```
 
@@ -115,12 +114,12 @@ Encodes data to a Base32 string.
 
 ###### Parameters
 
-| Parameter         | Type            | Description                        |
-|-------------------|-----------------|------------------------------------|
-| `data`            | `CoerceToUint8ArrayInput` | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
-| `variant`         | `Variant`       | The Base32 variant to use. |
-| `options`         | `EncodeOptions` | (Optional) Encoding options. |
-| `options.padding` | `boolean`       | If set, forcefully enable or disable padding. The default behavior is to follow the default of the selected variant. |
+| Parameter         | Type                      | Description                                                                                                          |
+| ----------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `data`            | `CoerceToUint8ArrayInput` | The data to encode. See the [list of supported input data types](#supported-input-data-types).                       |
+| `variant`         | `Variant`                 | The Base32 variant to use.                                                                                           |
+| `options`         | `EncodeOptions`           | (Optional) Encoding options.                                                                                         |
+| `options.padding` | `boolean`                 | If set, forcefully enable or disable padding. The default behavior is to follow the default of the selected variant. |
 
 ###### Returns
 
@@ -131,13 +130,13 @@ A Base32 encoded string.
 ###### Example usage
 
 ```ts
-import { Base32 } from '@alessiofrittoli/crypto-encoder'
 // or
 import { Base32 } from '@alessiofrittoli/crypto-encoder/Base32'
+import { Base32 } from '@alessiofrittoli/crypto-encoder'
 
-console.log( Base32.encode( 'some value', 'RFC3548' ) )
+console.log(Base32.encode('some value', 'RFC3548'))
 // or
-console.log( Base32.encode( 'some value', Base32.VARIANT.RFC3548 ) )
+console.log(Base32.encode('some value', Base32.VARIANT.RFC3548))
 // Outputs: 'ONXW2ZJAOZQWY5LF'
 ```
 
@@ -149,10 +148,10 @@ Decodes a Base32 data.
 
 ###### Parameters
 
-| Parameter | Type                      | Description                                  |
-|-----------|---------------------------|----------------------------------------------|
+| Parameter | Type                      | Description                                                                                         |
+| --------- | ------------------------- | --------------------------------------------------------------------------------------------------- |
 | `data`    | `CoerceToUint8ArrayInput` | The Base32-encoded data. See the [list of supported input data types](#supported-input-data-types). |
-| `variant` | `Variant`                 | The Base32 variant used to encode the input. |
+| `variant` | `Variant`                 | The Base32 variant used to encode the input.                                                        |
 
 ###### Returns
 
@@ -163,20 +162,20 @@ An `Uint8Array` containing the decoded data.
 ###### Example usage
 
 ```ts
-import { Base32 } from '@alessiofrittoli/crypto-encoder'
 // or
 import { Base32 } from '@alessiofrittoli/crypto-encoder/Base32'
+import { Base32 } from '@alessiofrittoli/crypto-encoder'
 
-const input		= 'ONXW2ZJAOZQWY5LF'
-const decoded	= Base32.decode( input, 'RFC3548' )
+const input = 'ONXW2ZJAOZQWY5LF'
+const decoded = Base32.decode(input, 'RFC3548')
 // or
-const decoded	= Base32.decode( input, Base32.VARIANT.RFC3548 )
+const decoded = Base32.decode(input, Base32.VARIANT.RFC3548)
 
-console.log( Buffer.from( decoded ).toString() ) // Node.js
+console.log(Buffer.from(decoded).toString()) // Node.js
 // or
-console.log( new TextDecoder().decode( decoded ) ) // client-side
+console.log(new TextDecoder().decode(decoded)) // client-side
 // or
-console.log( Base32.toString( decoded ) ) // Node.js + client-side
+console.log(Base32.toString(decoded)) // Node.js + client-side
 // Outputs: 'some value'
 ```
 
@@ -214,10 +213,10 @@ Encodes data to a Base64 or Base64url string.
 
 ###### Parameters
 
-| Parameter   | Type            | Default | Description                                   |
-|-------------|-----------------|---------| ----------------------------------------------|
-| `data`      | `CoerceToUint8ArrayInput` | - | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
-| `normalize` | `boolean`       | `true` | Whether to normalize the output to Base64url. |
+| Parameter   | Type                      | Default | Description                                                                                    |
+| ----------- | ------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `data`      | `CoerceToUint8ArrayInput` | -       | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
+| `normalize` | `boolean`                 | `true`  | Whether to normalize the output to Base64url.                                                  |
 
 ###### Returns
 
@@ -228,16 +227,16 @@ A Base64 or Base64url encoded string.
 ###### Example
 
 ```ts
-import { Base64 } from '@alessiofrittoli/crypto-encoder'
 // or
 import { Base64 } from '@alessiofrittoli/crypto-encoder/Base64'
+import { Base64 } from '@alessiofrittoli/crypto-encoder'
 
-const data		= 'Hello, World!'
-const base64	= Base64.encode( data, false )
-const base64url	= Base64.encode( data )
+const data = 'Hello, World!'
+const base64 = Base64.encode(data, false)
+const base64url = Base64.encode(data)
 
-console.log( base64 ) // Outputs: 'SGVsbG8sIFdvcmxkIQ=='
-console.log( base64url ) // Outputs: 'SGVsbG8sIFdvcmxkIQ'
+console.log(base64) // Outputs: 'SGVsbG8sIFdvcmxkIQ=='
+console.log(base64url) // Outputs: 'SGVsbG8sIFdvcmxkIQ'
 ```
 
 ---
@@ -248,8 +247,8 @@ Decodes a Base64 or Base64url string.
 
 ###### Parameters
 
-| Parameter | Type                      | Description                               |
-|-----------|---------------------------|-------------------------------------------|
+| Parameter | Type                      | Description                                                                                                      |
+| --------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `data`    | `CoerceToUint8ArrayInput` | The Base64 or Base64url encoded data. See the [list of supported input data types](#supported-input-data-types). |
 
 ###### Returns
@@ -261,16 +260,16 @@ A `Buffer` containing the decoded data.
 ###### Example
 
 ```ts
-import { Base64 } from '@alessiofrittoli/crypto-encoder'
 // or
 import { Base64 } from '@alessiofrittoli/crypto-encoder/Base64'
+import { Base64 } from '@alessiofrittoli/crypto-encoder'
 
-const base64	= 'SGVsbG8sIFdvcmxkIQ=='
-const base64url	= 'SGVsbG8sIFdvcmxkIQ'
+const base64 = 'SGVsbG8sIFdvcmxkIQ=='
+const base64url = 'SGVsbG8sIFdvcmxkIQ'
 
-console.log( Base64.toString( Base64.decode( base64 ) ) )
+console.log(Base64.toString(Base64.decode(base64)))
 // or
-console.log( Base64.toString( Base64.decode( base64url ) ) )
+console.log(Base64.toString(Base64.decode(base64url)))
 // Outputs: 'Hello, World!'
 ```
 
@@ -308,11 +307,11 @@ Encodes the provided data using the specified encoding scheme.
 
 ###### Parameters
 
-| Parameter       | Type       | Default | Description                                |
-|-----------------|------------|---------| -------------------------------------------|
-| `data`          | `CoerceToUint8ArrayInput` | - | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
-| `encoding`      | `Encoding` | `utf8`  | (Optional) The output encoding.            |
-| `inputEncoding` | `Encoding` | -       | (Optional) The encoding of the input data. |
+| Parameter       | Type                      | Default | Description                                                                                    |
+| --------------- | ------------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `data`          | `CoerceToUint8ArrayInput` | -       | The data to encode. See the [list of supported input data types](#supported-input-data-types). |
+| `encoding`      | `Encoding`                | `utf8`  | (Optional) The output encoding.                                                                |
+| `inputEncoding` | `Encoding`                | -       | (Optional) The encoding of the input data.                                                     |
 
 ###### Returns
 
@@ -329,23 +328,19 @@ The encoded data as a string.
 ###### Example
 
 ```ts
-import { Encoder } from '@alessiofrittoli/crypto-encoder'
 // or
 import { Encoder } from '@alessiofrittoli/crypto-encoder/Encoder'
+import { Encoder } from '@alessiofrittoli/crypto-encoder'
 
 const data = 'Hello, world!'
-const buffer = Buffer.from( data )
-const bytes = [
-    72, 101, 108, 108, 111,
-    44,  32, 119, 111, 114,
-    108, 100,  33
-]
+const buffer = Buffer.from(data)
+const bytes = [72, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100, 33]
 
-console.log( Encoder.encode( data, 'hex' ) )
-console.log( Encoder.encode( data, 'base32' ) )
-console.log( Encoder.encode( data, 'base64' ) )
-console.log( Encoder.encode( buffer ) )
-console.log( Encoder.encode( bytes ) )
+console.log(Encoder.encode(data, 'hex'))
+console.log(Encoder.encode(data, 'base32'))
+console.log(Encoder.encode(data, 'base64'))
+console.log(Encoder.encode(buffer))
+console.log(Encoder.encode(bytes))
 ```
 
 ---
@@ -356,10 +351,10 @@ Decodes the provided data using the specified encoding scheme.
 
 ###### Parameters
 
-| Parameter | Type                      | Description                               |
-|-----------|---------------------------|-------------------------------------------|
-| `data`    | `CoerceToUint8ArrayInput` | The input data to decode. See the [list of supported input data types](#supported-input-data-types). |
-| `encoding`| `Encoding` | The encoding of the input data. |
+| Parameter  | Type                      | Description                                                                                          |
+| ---------- | ------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `data`     | `CoerceToUint8ArrayInput` | The input data to decode. See the [list of supported input data types](#supported-input-data-types). |
+| `encoding` | `Encoding`                | The encoding of the input data.                                                                      |
 
 ###### Returns
 
@@ -376,12 +371,12 @@ A `Buffer` containing the decoded data.
 ###### Example
 
 ```ts
-import { Encoder } from '@alessiofrittoli/crypto-encoder'
 // or
 import { Encoder } from '@alessiofrittoli/crypto-encoder/Encoder'
+import { Encoder } from '@alessiofrittoli/crypto-encoder'
 
-const decoded = Encoder.decode( 'JBSWY3DPFQQHO33SNRSCC===', 'base32' )
-console.log( Encoder.toString( decoded ) ) // Outputs: 'Hello, world!'
+const decoded = Encoder.decode('JBSWY3DPFQQHO33SNRSCC===', 'base32')
+console.log(Encoder.toString(decoded)) // Outputs: 'Hello, world!'
 ```
 
 </details>
@@ -390,7 +385,7 @@ console.log( Encoder.toString( decoded ) ) // Outputs: 'Hello, world!'
 
 ### Development
 
-#### Install depenendencies
+#### Install dependencies
 
 ```bash
 npm install
@@ -412,7 +407,7 @@ pnpm build
 
 #### [ESLint](https://www.npmjs.com/package/eslint)
 
-warnings / errors check.
+Run warnings and errors checks.
 
 ```bash
 pnpm lint

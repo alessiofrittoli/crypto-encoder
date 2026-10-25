@@ -1,8 +1,12 @@
-import { binaryToString, coerceToUint8Array, type CoerceToUint8ArrayInput } from '@alessiofrittoli/crypto-buffer'
+import {
+	binaryToString,
+	coerceToUint8Array,
+	type CoerceToUint8ArrayInput,
+} from '@alessiofrittoli/crypto-buffer'
 
 /**
  * Base32 Variant
- * 
+ *
  * - `'RFC3548'` - Alias for `'RFC4648'`
  * - `'RFC4648'` - [Base32 from RFC4648](https://tools.ietf.org/html/rfc4648)
  * - `'RFC4648-HEX'` - [base32hex from RFC4648](https://tools.ietf.org/html/rfc4648)
@@ -10,34 +14,62 @@ import { binaryToString, coerceToUint8Array, type CoerceToUint8ArrayInput } from
  */
 export type Variant = 'RFC3548' | 'RFC4648' | 'RFC4648-HEX' | 'Crockford'
 
+type EncodeVariantAlphabetAndPadding =
+	| {
+			readonly alphabet: (typeof Base32)['ALPHABET']['RFC4648']
+			readonly padding: true
+	  }
+	| {
+			readonly alphabet: (typeof Base32)['ALPHABET']['RFC4648_HEX']
+			readonly padding: true
+	  }
+	| {
+			readonly alphabet: (typeof Base32)['ALPHABET']['CROCKFORD']
+			readonly padding: false
+	  }
+
+type DecodeVariantAlphabetAndInput =
+	| {
+			readonly alphabet: (typeof Base32)['ALPHABET']['RFC4648']
+			readonly input: string
+	  }
+	| {
+			readonly alphabet: (typeof Base32)['ALPHABET']['RFC4648_HEX']
+			readonly input: string
+	  }
+	| {
+			readonly alphabet: (typeof Base32)['ALPHABET']['CROCKFORD']
+			readonly input: string
+	  }
 
 interface EncodeOptions {
-	/** If set, forcefully enable or disable padding. The default behavior is to follow the default of the selected variant. */
+	/**
+	 * If set, forcefully enable or disable padding. The default behavior is to follow the default of the selected variant.
+	 *
+	 */
 	padding?: boolean
 }
 
-
 /**
  * Base32 Utility static class.
- * 
+ *
  * Supported Variants:
- * 
+ *
  * - `'RFC3548'` - Alias for `'RFC4648'`
  * - `'RFC4648'` - [Base32 from RFC4648](https://tools.ietf.org/html/rfc4648)
  * - `'RFC4648-HEX'` - [base32hex from RFC4648](https://tools.ietf.org/html/rfc4648)
  * - `'Crockford'` - [Crockford's Base32](http://www.crockford.com/wrmg/base32.html)
  */
-export class Base32
-{
+export class Base32 {
 	/**
 	 * Base32 Variant
-	 * 
+	 *
 	 * - `'RFC3548'` - Alias for `'RFC4648'`
 	 * - `'RFC4648'` - [Base32 from RFC4648](https://tools.ietf.org/html/rfc4648)
 	 * - `'RFC4648-HEX'` - [base32hex from RFC4648](https://tools.ietf.org/html/rfc4648)
 	 * - `'Crockford'` - [Crockford's Base32](http://www.crockford.com/wrmg/base32.html)
 	 */
-	static VARIANT = {
+	public static readonly VARIANT = {
 		/** Alias for `'RFC4648'` */
 		RFC3548: 'RFC3548',
 		/** [Base32 from RFC4648](https://tools.ietf.org/html/rfc4648) */
@@ -48,100 +80,91 @@ export class Base32
 		Crockford: 'Crockford',
 	} as const
 
-
 	/**
 	 * Alphabet based on the Base32 Variant.
-	 * 
+	 *
 	 */
-	private static ALPHABET = {
-		RFC4648		: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567',
-		RFC4648_HEX	: '0123456789ABCDEFGHIJKLMNOPQRSTUV',
-		CROCKFORD	: '0123456789ABCDEFGHJKMNPQRSTVWXYZ',
+	private static readonly ALPHABET = {
+		RFC4648: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567',
+		RFC4648_HEX: '0123456789ABCDEFGHIJKLMNOPQRSTUV',
+		CROCKFORD: '0123456789ABCDEFGHJKMNPQRSTVWXYZ',
 	} as const
-
 
 	/**
 	 * Encode data to Base32.
-	 * 
+	 *
 	 * @param	data	The data to encode.
 	 * @param	variant	The Variant to use.
 	 * @param	options	( Optional ) An object defining encoding options.
 	 * @returns	The encoded `data` to Base32 string.
-	 * 
+	 *
 	 * ---
-	 * 
+	 *
 	 * Supported variants:
-	 * 
+	 *
 	 * - `'RFC3548'` - Alias for `'RFC4648'`
 	 * - `'RFC4648'` - [Base32 from RFC4648](https://tools.ietf.org/html/rfc4648)
 	 * - `'RFC4648-HEX'` - [base32hex from RFC4648](https://tools.ietf.org/html/rfc4648)
 	 * - `'Crockford'` - [Crockford's Base32](http://www.crockford.com/wrmg/base32.html)
 	 */
-	static encode(
-		data		: CoerceToUint8ArrayInput,
-		variant		: Variant,
-		options?	: EncodeOptions,
-	)
-	{
-		options ||= {}
+	public static encode(
+		data: CoerceToUint8ArrayInput,
+		variant: Variant,
+		options: EncodeOptions = {},
+	): string {
+		const resolved = Base32.getEncodeVariantAlphabetAndPadding(variant)
+		const { padding = resolved.padding } = options
+		const buffer = coerceToUint8Array(data)
 
-		const resolved	= Base32.getEncodeVariantAlphabetAndPadding( variant )
-		const padding	= options.padding ?? resolved.padding
-		const buffer	= coerceToUint8Array( data )
-		
-		let bits	= 0
-		let value	= 0
-		let output	= ''
-		
-		for ( let i = 0; i < buffer.byteLength; i++ ) {
-			value	= ( value << 8 ) | buffer[ i ]!
-			bits	+= 8
-		
-			while ( bits >= 5 ) {
-				output	+= resolved.alphabet[ ( value >>> ( bits - 5 ) ) & 31 ]
-				bits	-= 5
+		let bits = 0
+		let value = 0
+		let output = ''
+
+		for (let i = 0; i < buffer.byteLength; i++) {
+			value = (value << 8) | buffer[i]!
+			bits += 8
+
+			while (bits >= 5) {
+				output += resolved.alphabet[(value >>> (bits - 5)) & 31]
+				bits -= 5
 			}
 		}
-		
-		if ( bits > 0 ) {
-			output += resolved.alphabet[ ( value << ( 5 - bits ) ) & 31 ]
+
+		if (bits > 0) {
+			output += resolved.alphabet[(value << (5 - bits)) & 31]
 		}
-		
-		if ( padding ) {
-			while ( ( output.length % 8 ) !== 0 ) {
+
+		if (padding) {
+			while (output.length % 8 !== 0) {
 				output += '='
 			}
 		}
-		
+
 		return output
-
 	}
-
 
 	/**
 	 * Decode a Base32 data.
-	 * 
+	 *
 	 * @param	data	The input data to decode.
 	 * @param	variant	The Variant used to encode the given input.
 	 * @returns	The `ArrayBuffer` result of decoded `input`.
 	 */
-	static decode( data: CoerceToUint8ArrayInput, variant: Variant )
-	{
-		
-		let bits	= 0
-		let value	= 0
-		let index	= 0
-		
-		const parsed		= Base32.getDecodeVariantAlphabetAndInput( data, variant )
-		const { length }	= parsed.input
-		const output		= new Uint8Array( ( length * 5 / 8 ) | 0 )
+	public static decode(data: CoerceToUint8ArrayInput, variant: Variant): Uint8Array<ArrayBuffer> {
+		let bits = 0
+		let value = 0
+		let index = 0
 
-		for ( let i = 0; i < length; i++ ) {
-			value	= ( value << 5 ) | Base32.readChar( parsed.alphabet, parsed.input[ i ]! )
-			bits	+= 5
+		const parsed = Base32.getDecodeVariantAlphabetAndInput(data, variant)
+		const { length } = parsed.input
+		const output = new Uint8Array(((length * 5) / 8) | 0)
 
-			if ( bits >= 8 ) {
-				output[ index++ ] = ( value >>> ( bits - 8 ) ) & 255
+		for (let i = 0; i < length; i++) {
+			value = (value << 5) | Base32.readChar(parsed.alphabet, parsed.input[i]!)
+			bits += 5
+
+			if (bits >= 8) {
+				output[index++] = (value >>> (bits - 8)) & 255
 				bits -= 8
 			}
 		}
@@ -149,96 +172,91 @@ export class Base32
 		return output
 	}
 
-
 	/**
 	 * Get the index of the `char` in the Base32 Variant `alphabet`.
-	 * 
+	 *
 	 * @param	alphabet	The Base32 Variant alphabet.
 	 * @param	char		The character.
 	 * @returns	The index of the `char` in the `alphabet`.
 	 */
-	private static readChar( alphabet: ValueOf<typeof Base32.ALPHABET>, char: string )
-	{
-		const index = alphabet.indexOf( char )
+	private static readChar(
+		alphabet: (typeof Base32.ALPHABET)[keyof typeof Base32.ALPHABET],
+		char: string,
+	): number {
+		const index = alphabet.indexOf(char)
 
-		if ( index === -1 ) {
-			throw new Error( `Invalid character found: "${ char }"` )
+		if (index === -1) {
+			throw new Error(`Invalid character found: "${char}"`)
 		}
-	
+
 		return index
 	}
 
-
 	/**
 	 * Get Variant alphabet and default padding setting.
-	 * 
+	 *
 	 * @param	variant The Base32 Variant.
 	 * @returns	An object with `alphabet` and default `padding` flag based on the given `variant`.
 	 */
-	private static getEncodeVariantAlphabetAndPadding( variant: Variant )
-	{
-		switch ( variant ) {
+	private static getEncodeVariantAlphabetAndPadding(variant: Variant): EncodeVariantAlphabetAndPadding {
+		switch (variant) {
 			case 'RFC3548':
 			case 'RFC4648':
 				return {
 					alphabet: Base32.ALPHABET.RFC4648,
-					padding	: true,
+					padding: true,
 				} as const
 			case 'RFC4648-HEX':
 				return {
 					alphabet: Base32.ALPHABET.RFC4648_HEX,
-					padding	: true,
+					padding: true,
 				} as const
 			case 'Crockford':
 				return {
 					alphabet: Base32.ALPHABET.CROCKFORD,
-					padding	: false,
+					padding: false,
 				} as const
 			default:
-				throw new Error( `Unknown base32 variant: ${ variant }` )
+				// oxlint-disable-next-line typescript/restrict-template-expressions
+				throw new Error(`Unknown base32 variant: ${variant}`)
 		}
 	}
 
-
 	/**
 	 * Get Variant alphabet and parsed input.
-	 * 
+	 *
 	 * @param	input	The input to parse.
 	 * @param	variant	The Base32 Variant.
 	 * @returns	An object with `alphabet` and parsed `input` based on the given `variant`.
 	 */
-	private static getDecodeVariantAlphabetAndInput( input: CoerceToUint8ArrayInput, variant: Variant )
-	{
-		input = (
-			Base32.toString( input )
-				.replace( /=+$/, '' ).toUpperCase()
-		)
+	private static getDecodeVariantAlphabetAndInput(
+		_input: CoerceToUint8ArrayInput,
+		variant: Variant,
+	): DecodeVariantAlphabetAndInput {
+		const input = Base32.toString(_input).replace(/=+$/, '').toUpperCase()
 
-		switch ( variant ) {
+		switch (variant) {
 			case 'RFC3548':
 			case 'RFC4648':
 				return {
 					alphabet: Base32.ALPHABET.RFC4648,
-					input	: input,
+					input,
 				} as const
 			case 'RFC4648-HEX':
 				return {
 					alphabet: Base32.ALPHABET.RFC4648_HEX,
-					input	: input,
+					input,
 				} as const
 			case 'Crockford':
 				return {
 					alphabet: Base32.ALPHABET.CROCKFORD,
-					input	: (
-						input
-							.replace( /O/g, '0' )
-							.replace( /[IL]/g, '1' )
-					),
+					input: input.replace(/O/g, '0').replace(/[IL]/g, '1'),
 				} as const
 			default:
-				throw new Error( `Unknown base32 variant: ${ variant }` )
+				// oxlint-disable-next-line typescript/restrict-template-expressions
+				throw new Error(`Unknown base32 variant: ${variant}`)
 		}
 	}
 
-	static toString = binaryToString
+	public static toString = binaryToString
 }

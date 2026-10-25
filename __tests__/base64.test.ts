@@ -1,3 +1,103 @@
-import { runBase64UnitTests } from './base64'
+import { coerceToBigInt64Array, coerceToBigUint64Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToInt16Array, coerceToUint16Array } from '@alessiofrittoli/crypto-buffer'
+import { coerceToInt32Array, coerceToUint32Array } from '@alessiofrittoli/crypto-buffer'
+import { stringToBytes } from '@alessiofrittoli/crypto-buffer'
+import { describe, expect, it } from 'vitest'
+import { Base64 } from '@/Base64'
 
-runBase64UnitTests()
+const str: {
+	value: string
+	base64: string
+	base64url: string
+} = {
+	value: '0eacab1f472e752a95fea263375a5e0d00b620ee5f5181234e2e57f95b0f7db3d8478a4339d1fe3a6e22bf40e895acafea75e693f5be58fa1af409035fde7cda',
+	base64: 'MGVhY2FiMWY0NzJlNzUyYTk1ZmVhMjYzMzc1YTVlMGQwMGI2MjBlZTVmNTE4MTIzNGUyZTU3Zjk1YjBmN2RiM2Q4NDc4YTQzMzlkMWZlM2E2ZTIyYmY0MGU4OTVhY2FmZWE3NWU2OTNmNWJlNThmYTFhZjQwOTAzNWZkZTdjZGE=',
+	base64url:
+		'MGVhY2FiMWY0NzJlNzUyYTk1ZmVhMjYzMzc1YTVlMGQwMGI2MjBlZTVmNTE4MTIzNGUyZTU3Zjk1YjBmN2RiM2Q4NDc4YTQzMzlkMWZlM2E2ZTIyYmY0MGU4OTVhY2FmZWE3NWU2OTNmNWJlNThmYTFhZjQwOTAzNWZkZTdjZGE',
+}
+
+describe('Base64', () => {
+	describe('Base64.fromBase64()', () => {
+		it('normalizes a base64 String to base64url', () => {
+			expect(Base64.fromBase64(str.base64)).toBe(str.base64url)
+		})
+	})
+
+	describe('Base64.fromBase64url()', () => {
+		it('normalizes a base64url String to base64', () => {
+			expect(Base64.fromBase64url(str.base64url)).toBe(str.base64)
+		})
+	})
+
+	describe('Base64.encode()', () => {
+		it('encodes to base64', () => {
+			expect(Base64.encode(str.value, false)).toBe(str.base64)
+		})
+
+		it('encodes to base64url', () => {
+			expect(Base64.encode(str.value)).toBe(str.base64url)
+		})
+
+		it('encodes Array of bytes to base64', () => {
+			expect(Base64.encode(stringToBytes(str.value), false)).toBe(str.base64)
+		})
+
+		it('encodes Buffer to base64', () => {
+			expect(Base64.encode(Buffer.from(str.value, 'utf-8'), false)).toBe(str.base64)
+		})
+
+		it('encodes ArrayBuffer to base64', () => {
+			expect(Base64.encode(new Uint8Array(stringToBytes(str.value)).buffer, false)).toBe(str.base64)
+		})
+
+		it('encodes Int8Array to base64', () => {
+			expect(Base64.encode(new Int8Array(stringToBytes(str.value)), false)).toBe(str.base64)
+		})
+
+		it('encodes Int16Array to base64', () => {
+			expect(Base64.encode(coerceToInt16Array(str.value), false)).toBe(str.base64)
+		})
+
+		it('encodes Int32Array to base64', () => {
+			expect(Base64.encode(coerceToInt32Array(str.value), false)).toBe(str.base64)
+		})
+
+		it('encodes Uint8Array to base64', () => {
+			expect(Base64.encode(new Uint8Array(stringToBytes(str.value)), false)).toBe(str.base64)
+		})
+
+		it('encodes Uint16Array to base64', () => {
+			expect(Base64.encode(coerceToUint16Array(str.value), false)).toBe(str.base64)
+		})
+
+		it('encodes Uint32Array to base64', () => {
+			expect(Base64.encode(coerceToUint32Array(str.value), false)).toBe(str.base64)
+		})
+
+		it('encodes Uint8ClampedArray to base64', () => {
+			expect(Base64.encode(new Uint8ClampedArray(stringToBytes(str.value)), false)).toBe(str.base64)
+		})
+
+		it('encodes BigInt64Array to base64', () => {
+			expect(Base64.encode(coerceToBigInt64Array(str.value), false)).toBe(str.base64)
+		})
+
+		it('encodes BigUint64Array to base64', () => {
+			expect(Base64.encode(coerceToBigUint64Array(str.value), false)).toBe(str.base64)
+		})
+	})
+
+	describe('Base64.decode()', () => {
+		it('decodes base64 String', () => {
+			const decoded = Base64.toString(Base64.decode(str.base64))
+
+			expect(decoded).toBe(str.value)
+		})
+
+		it('decodes base64url String', () => {
+			const decoded = Base64.toString(Base64.decode(str.base64url))
+
+			expect(decoded).toBe(str.value)
+		})
+	})
+})
