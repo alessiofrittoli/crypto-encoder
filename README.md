@@ -1,36 +1,61 @@
-# Crypto Encoder 🧮
+<h1 align="center">Crypto Encoder 🧮</h1>
+<p align="center">
+  Lightweight TypeScript encoder/decoder library
+</p>
+<p align="center">
+  <a href="https://npmjs.org/package/@alessiofrittoli/crypto-encoder">
+    <img src="https://img.shields.io/npm/v/@alessiofrittoli/crypto-encoder" alt="Latest version"/>
+  </a>
+  <a href="https://coveralls.io/github/alessiofrittoli/crypto-encoder">
+    <img src="https://coveralls.io/repos/github/alessiofrittoli/crypto-encoder/badge.svg" alt="Test coverage"/>
+  </a>
+  <a href="https://socket.dev/npm/package/@alessiofrittoli/crypto-encoder/overview">
+    <img src="https://socket.dev/api/badge/npm/package/@alessiofrittoli/crypto-encoder" alt="Socket Security score"/>
+  </a>
+  <a href="https://npmjs.org/package/@alessiofrittoli/crypto-encoder">
+    <img src="https://img.shields.io/npm/dm/@alessiofrittoli/crypto-encoder.svg" alt="npm downloads"/>
+  </a>
+  <a href="https://bundlephobia.com/package/@alessiofrittoli/crypto-encoder">
+    <img src="https://badgen.net/bundlephobia/dependency-count/@alessiofrittoli/crypto-encoder" alt="Dependencies"/>
+  </a>
+  <a href="https://libraries.io/npm/%40alessiofrittoli%2Fcrypto-encoder">
+    <img src="https://img.shields.io/librariesio/release/npm/@alessiofrittoli/crypto-encoder" alt="Dependencies status"/>
+  </a>
+</p>
+<p align="center">
+  <a href="https://bundlephobia.com/package/@alessiofrittoli/crypto-encoder">
+    <img src="https://badgen.net/bundlephobia/min/@alessiofrittoli/crypto-encoder" alt="minified"/>
+  </a>
+  <a href="https://bundlephobia.com/package/@alessiofrittoli/crypto-encoder">
+    <img src="https://badgen.net/bundlephobia/minzip/@alessiofrittoli/crypto-encoder" alt="minizipped"/>
+  </a>
+  <a href="https://bundlephobia.com/package/@alessiofrittoli/crypto-encoder">
+    <img src="https://badgen.net/bundlephobia/tree-shaking/@alessiofrittoli/crypto-encoder" alt="Tree shakable"/>
+  </a>
+</p>
+<p align="center">
+  <a href="https://github.com/sponsors/alessiofrittoli">
+    <img src="https://img.shields.io/static/v1?label=Fund%20this%20package&message=%E2%9D%A4&logo=GitHub&color=%23DB61A2" alt="Fund this package"/>
+  </a>
+</p>
 
-[![NPM Latest Version][version-badge]][npm-url] [![Coverage Status][coverage-badge]][coverage-url] [![Socket Status][socket-badge]][socket-url] [![NPM Monthly Downloads][downloads-badge]][npm-url] [![Dependencies][deps-badge]][deps-url]
-
-[![GitHub Sponsor][sponsor-badge]][sponsor-url]
-
-[version-badge]: https://img.shields.io/npm/v/%40alessiofrittoli%2Fcrypto-encoder
-[npm-url]: https://npmjs.org/package/%40alessiofrittoli%2Fcrypto-encoder
-[coverage-badge]: https://coveralls.io/repos/github/alessiofrittoli/crypto-encoder/badge.svg
-[coverage-url]: https://coveralls.io/github/alessiofrittoli/crypto-encoder
-[socket-badge]: https://socket.dev/api/badge/npm/package/@alessiofrittoli/crypto-encoder
-[socket-url]: https://socket.dev/npm/package/@alessiofrittoli/crypto-encoder/overview
-[downloads-badge]: https://img.shields.io/npm/dm/%40alessiofrittoli%2Fcrypto-encoder.svg
-[deps-badge]: https://img.shields.io/librariesio/release/npm/%40alessiofrittoli%2Fcrypto-encoder
-[deps-url]: https://libraries.io/npm/%40alessiofrittoli%2Fcrypto-encoder
 [sponsor-badge]: https://img.shields.io/static/v1?label=Fund%20this%20package&message=%E2%9D%A4&logo=GitHub&color=%23DB61A2
 [sponsor-url]: https://github.com/sponsors/alessiofrittoli
-
-## Lightweight TypeScript encoder/decoder library
 
 ### Table of Contents
 
 - [Getting started](#getting-started)
-- [Base32](#base32)
-- [Base64](#base64)
-- [Encoder](#encoder)
 - [Development](#development)
-  - [Install dependencies](#install-dependencies)
-  - [Build the source code](#build-the-source-code)
-  - [ESLint](#eslint)
-  - [Jest](#jest)
-- [Contributing](#contributing)
-- [Security](#security)
+  - [Local development](#local-development)
+  - [Production build](#production-build)
+  - [Unit tests](#unit-tests)
+    - [Run tests with coverage](#run-tests-with-coverage)
+  - [Contributing](#contributing)
+  - [Security](#security)
+- [API Reference](#api-reference)
+  - [Base32](#base32)
+  - [Base64](#base64)
+  - [Encoder](#encoder)
 - [Credits](#made-with-)
 
 ---
@@ -51,13 +76,93 @@ pnpm i @alessiofrittoli/crypto-encoder
 
 ---
 
-### Supported input data types
+### Development
+
+Run the following to start development
+
+```shell
+nvm use
+
+pnpm i
+```
+
+#### Local development
+
+Run the following
+
+```shell
+pnpm dev
+```
+
+This will generate unminified output code, sourcemaps and will enable source file watcher.
+
+---
+
+#### Production build
+
+Run the following to create a local production build
+
+```shell
+pnpm build
+```
+
+This will generate minified output code without sourcemaps.
+
+---
+
+#### Unit tests
+
+Run all the defined test suites by running the following:
+
+```shell
+# Run tests and watch file changes.
+pnpm test:watch
+
+# Run tests in a CI environment.
+pnpm test:ci
+```
+
+---
+
+##### Run tests with coverage
+
+An HTTP server is then started to serve coverage files from `./coverage` folder.
+
+⚠️ You may see a blank page the first time you run this command. Simply refresh the browser to see the updates.
+
+```shell
+pnpm test:coverage:serve
+```
+
+---
+
+#### Contributing
+
+Contributions are truly welcome!
+
+Please refer to the [Contributing Doc](./CONTRIBUTING.md) for more information on how to start contributing to this project.
+
+Help keep this project up to date with [GitHub Sponsor][sponsor-url].
+
+[![GitHub Sponsor][sponsor-badge]][sponsor-url]
+
+---
+
+#### Security
+
+If you believe you have found a security vulnerability, we encourage you to **_responsibly disclose this and NOT open a public issue_**. We will investigate all legitimate reports. Email `security@alessiofrittoli.it` to disclose any security vulnerabilities.
+
+---
+
+### API Reference
+
+#### Supported input data types
 
 This module supports different input data types and it uses the `coerceToUint8Array` utility function from [`@alessiofrittoli/crypto-buffer`](https://npmjs.com/package/@alessiofrittoli/crypto-buffer) to convert it to a `Uint8Array`.
 
 See [`CoerceToUint8ArrayInput`](https://npmjs.com/package/@alessiofrittoli/crypto-buffer#input-type-1) for a list of supported input data types.
 
-### Base32
+#### Base32
 
 This module provides a `Base32` utility class for encoding and decoding data according to various `Base32` specifications.\
 It supports multiple `Base32` variants and offers flexible options for encoding.
@@ -91,9 +196,9 @@ The following Base32 variants are supported:
 
 <summary>API Reference</summary>
 
-#### Static Properties
+##### Static Properties
 
-##### `Base32.VARIANT`
+###### `Base32.VARIANT`
 
 An object containing the available Base32 variants:
 
@@ -106,9 +211,9 @@ Base32.VARIANT = {
 }
 ```
 
-#### Static Methods
+##### Static Methods
 
-##### `Base32.encode()`
+###### `Base32.encode()`
 
 Encodes data to a Base32 string.
 
@@ -142,7 +247,7 @@ console.log(Base32.encode('some value', Base32.VARIANT.RFC3548))
 
 ---
 
-##### `Base32.decode()`
+###### `Base32.decode()`
 
 Decodes a Base32 data.
 
@@ -183,7 +288,7 @@ console.log(Base32.toString(decoded)) // Node.js + client-side
 
 ---
 
-### Base64
+#### Base64
 
 This module provides a static `Base64` utility class for encoding and decoding data to and from Base64/Base64url formats. It supports various input types and offers options for normalization between Base64 and Base64url formats.
 
@@ -205,9 +310,9 @@ The implementation is compatible with both browser and Node.js environments.
 
 <summary>API Reference</summary>
 
-#### Static Methods
+##### Static Methods
 
-##### `Base64.encode()`
+###### `Base64.encode()`
 
 Encodes data to a Base64 or Base64url string.
 
@@ -241,7 +346,7 @@ console.log(base64url) // Outputs: 'SGVsbG8sIFdvcmxkIQ'
 
 ---
 
-##### `Base64.decode()`
+###### `Base64.decode()`
 
 Decodes a Base64 or Base64url string.
 
@@ -277,7 +382,7 @@ console.log(Base64.toString(Base64.decode(base64url)))
 
 ---
 
-### Encoder
+#### Encoder
 
 The `Encoder` class provides static methods for encoding and decoding data using various encoding schemes, including custom ones like `base32`.
 
@@ -285,23 +390,23 @@ The `Encoder` class provides static methods for encoding and decoding data using
 
 <summary>API Reference</summary>
 
-#### **Types**
+##### **Types**
 
-##### `Encoding`
+###### `Encoding`
 
 Represents the encoding types supported by the `Encoder` class. Includes all standard `BufferEncoding` types as well as the custom `base32` encoding.
 
-#### Static Properties
+##### Static Properties
 
-##### `Encoder.SUPPORTED_ENCODINGS`
+###### `Encoder.SUPPORTED_ENCODINGS`
 
 Type: `Encoding[]`
 
 A list of all encodings supported by the `Encoder` class. Includes standard `BufferEncoding` types and the custom `base32` encoding.
 
-#### Static Methods
+##### Static Methods
 
-##### `Encoder.encode()`
+###### `Encoder.encode()`
 
 Encodes the provided data using the specified encoding scheme.
 
@@ -345,7 +450,7 @@ console.log(Encoder.encode(bytes))
 
 ---
 
-##### `Encoder.decode()`
+###### `Encoder.decode()`
 
 Decodes the provided data using the specified encoding scheme.
 
@@ -382,78 +487,6 @@ console.log(Encoder.toString(decoded)) // Outputs: 'Hello, world!'
 </details>
 
 ---
-
-### Development
-
-#### Install dependencies
-
-```bash
-npm install
-```
-
-or using `pnpm`
-
-```bash
-pnpm i
-```
-
-#### Build the source code
-
-Run the following command to test and build code for distribution.
-
-```bash
-pnpm build
-```
-
-#### [ESLint](https://www.npmjs.com/package/eslint)
-
-Run warnings and errors checks.
-
-```bash
-pnpm lint
-```
-
-#### [Jest](https://npmjs.com/package/jest)
-
-Run all the defined test suites by running the following:
-
-```bash
-# Run tests and watch file changes.
-pnpm test:watch
-
-# Run tests in a CI environment.
-pnpm test:ci
-```
-
-- See [`package.json`](./package.json) file scripts for more info.
-
-Run tests with coverage.
-
-An HTTP server is then started to serve coverage files from `./coverage` folder.
-
-⚠️ You may see a blank page the first time you run this command. Simply refresh the browser to see the updates.
-
-```bash
-test:coverage:serve
-```
-
----
-
-### Contributing
-
-Contributions are truly welcome!
-
-Please refer to the [Contributing Doc](./CONTRIBUTING.md) for more information on how to start contributing to this project.
-
-Help keep this project up to date with [GitHub Sponsor][sponsor-url].
-
-[![GitHub Sponsor][sponsor-badge]][sponsor-url]
-
----
-
-### Security
-
-If you believe you have found a security vulnerability, we encourage you to **_responsibly disclose this and NOT open a public issue_**. We will investigate all legitimate reports. Email `security@alessiofrittoli.it` to disclose any security vulnerabilities.
 
 ### Made with ☕
 
